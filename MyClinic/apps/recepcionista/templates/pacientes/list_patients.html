@@ -1,0 +1,56 @@
+{% extends 'base_recepcionist.html' %}
+{% load static %}
+{% block content %}
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="col-md-10">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Gerenciar pacientes</li>
+                        <li class="breadcrumb-item active" aria-current="page">Lançamentos</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="col-md-2">
+                <a href="{% url 'patient_form' %}" class="btn btn-primary btn-sm">Adicionar paciente</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="table">
+            <table class="table table-stripped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cidade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in obj_pagina %}
+                    <tr>
+                        <td>{{patient.name}}</td>
+                        <td>{{patient.email}}</td>
+                        <td>{{patient.phone}}</td>
+                        <td>{{patient.city}}</td>
+                        <td>
+                            <a href="{% url 'patient_form' patient.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                            <a href="{% url 'delete_paciente' patient.id %}" class="btn btn-danger btn-sm">Deletar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+    
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+{% endblock %}
