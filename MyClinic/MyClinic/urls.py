@@ -21,4 +21,5 @@ urlpatterns = [
     path("", include("apps.accounts.urls")),
     path("", include("apps.administrador.urls")),
     path("", include("apps.recepcionista.urls")),
+    path("", include("apps.doutor.urls")),
 ]

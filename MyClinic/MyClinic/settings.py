@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "apps.administrador",
     'crispy_forms',
     "apps.recepcionista",
+    "apps.doutor",
 ]
 
 
