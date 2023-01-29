@@ -1,0 +1,14 @@
+{
+    "editor.formatOnSave": false,
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "88"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    },

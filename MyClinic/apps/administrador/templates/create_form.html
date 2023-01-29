@@ -1,0 +1,31 @@
+{% extends 'base_adm.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <div class="container mt-5">
+      <div class="row mt-5">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Cadastro</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formulário</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="row">
+          <div class="col-md-8 col-sm-10 col-12">
+            <h2>Cadastrar</h2>
+              <form method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success mt-5">Salvar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+      
+{% endblock %}
