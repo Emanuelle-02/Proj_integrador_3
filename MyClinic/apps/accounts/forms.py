@@ -8,9 +8,17 @@ from .models import *
 class DoctorForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['first_name','last_name', 'username', 'email', 'phone','city', 'specialization']
+        fields = [
+            "first_name",
+            "last_name",
+            "username",
+            "email",
+            "phone",
+            "city",
+            "specialization",
+        ]
 
-    #@transaction.atomic
+    # @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_doctor = True
@@ -22,9 +30,9 @@ class DoctorForm(UserCreationForm):
 class RecepcionistForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ['first_name','last_name', 'username', 'email', 'phone','city']
+        fields = ["first_name", "last_name", "username", "email", "phone", "city"]
 
-    #@transaction.atomic
+    # @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_recepcionist = True
