@@ -8,12 +8,13 @@
             <div class="col-md-10">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'list_recepcionist' %}">Gerenciar recepcionistas</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'list_recepcionist' %}">Gerenciar recepcionistas</a>
+                        </li>
                         <li class="breadcrumb-item active" aria-current="page">Recepcionistas</li>
                     </ol>
                 </nav>
             </div>
-                                
+
             <div class="col-md-2">
                 <a href="{% url 'recepcionist_create' %}" class="btn btn-primary">+ Recepcionista</a>
             </div>
@@ -38,12 +39,15 @@
                     <td>{{recepcionist.email}}</td>
                     <td>{{recepcionist.phone}}</td>
                     <td>{{recepcionist.city}}</td>
-                        
+                    <td>
+                        <a href="{% url 'recepcionist_create' recepcionist.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                        <a href="{% url 'recepcionist_delete' recepcionist.id %}" class="btn btn-secondary btn-sm">Remover</a>
+                    </td>  
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-            
+
         <div class="container">
             <div class="float-right">
                 Página {{obj_pagina.number}} de {{ obj_pagina.paginator.num_pages }}
@@ -70,7 +74,7 @@
         </div>
     </div>
 </div>
-    
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 {% endblock %}

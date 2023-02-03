@@ -12,8 +12,10 @@ from .models import Appointment, Income
 
 # Create your views here.
 
+
 class Recepcionist_Index(LoginRequiredMixin, View):
     login_url = "/recepcionista_login"
+
     def get(self, request):
         return render(request, "recepcionist_index.html")
 
@@ -22,7 +24,7 @@ class ListIncomeView(LoginRequiredMixin, View):
     login_url = "/recepcionista_login"
 
     def get(self, request):
-        rendas = Income.objects.all() 
+        rendas = Income.objects.all()
         paginator = Paginator(rendas, 5)
         pagina_num = request.GET.get("page")
         obj_pagina = Paginator.get_page(paginator, pagina_num)
@@ -65,8 +67,9 @@ class IncomeDeleteView(LoginRequiredMixin, DeleteView):
 
 class ListAppointmentView(LoginRequiredMixin, View):
     login_url = "/recepcionista_login"
+
     def get(self, request):
-        consulta = Appointment.objects.all() 
+        consulta = Appointment.objects.all()
         paginator = Paginator(consulta, 5)
         pagina_num = request.GET.get("page")
         obj_pagina = Paginator.get_page(paginator, pagina_num)
@@ -76,7 +79,7 @@ class ListAppointmentView(LoginRequiredMixin, View):
         }
         return render(request, "consultas/appointment_list.html", context)
 
-    
+
 class AppointmentCreateView(LoginRequiredMixin, CreateView):
     login_url = "/recepcionista_login"
     model = Appointment

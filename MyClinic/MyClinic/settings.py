@@ -37,15 +37,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_filters",
     "apps.accounts",
     "apps.administrador",
-    'crispy_forms',
+    "crispy_forms",
     "apps.recepcionista",
     "apps.doutor",
 ]
 
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -132,8 +133,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Custom Django auth settings
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = "accounts.User"
 
-LOGIN_URL = 'login'
+LOGIN_URL = "login"
 
-LOGOUT_URL = 'logout'
+LOGOUT_URL = "logout"

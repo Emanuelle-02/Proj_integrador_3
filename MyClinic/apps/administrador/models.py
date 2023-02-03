@@ -6,10 +6,11 @@ from apps.accounts.models import User
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=250, default = '-------------')
+    name = models.CharField(max_length=250, default="-------------")
 
     def __str__(self):
         return self.name
+
 
 class Expenses(models.Model):
     description = models.TextField()

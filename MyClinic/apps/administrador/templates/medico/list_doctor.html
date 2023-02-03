@@ -38,7 +38,9 @@
                     <td>{{doctor.specialization}}</td>
                     <td>{{doctor.email}}</td>
                     <td>{{doctor.phone}}</td>
-                        
+                    <td>
+                        <a href="{% url 'doctor_delete' doctor.id %}" class="btn btn-secondary btn-sm">Remover</a>
+                    </td>  
                 </tr>
                 {% endfor %}
             </tbody>
