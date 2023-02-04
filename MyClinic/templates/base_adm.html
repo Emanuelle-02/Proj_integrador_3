@@ -30,7 +30,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading" style="color: white;">Core</div>
-                            <a class="nav-link" href="#" style="color: white;">
+                            <a class="nav-link" href="{% url 'index' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fas fa-home"></i></div>
                                 Home
                             </a>
@@ -44,30 +44,23 @@
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-user"></i></div>
                                     Manter recepcionistas
                             </a>
-                            <div class="sb-sidenav-menu-heading" style="color: white;">Financeiro</div>
-                            <a class="nav-link" href="#" style="color: white;">
+                            <div class="sb-sidenav-menu-heading" style="color: white;">Fluxo de Caixa</div>
+                            <a class="nav-link" href="{% url 'list_caixa' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-wallet"></i></div>
-                                    Minha Receita
+                                    Entrada
                             </a>
                             <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-receipt" style="color: white;"></i></div>
-                                    Minhas Despesas
+                                    Saída
                                 <div class="sb-sidenav-collapse-arrow" style="color: white;"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="{% url 'list_despesas' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-file-invoice"></i></div>
-                                        Gerenciar despesas
+                                        Gerenciar saídas
                                     </a>
-                                    <!-- a class="nav-link" href="#" style="color: white;">
-                                        <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-chart-pie"></i></div>
-                                        Despesas por mês
-                                    </a>
-                                    <a class="nav-link" href="#" style="color: white;">
-                                        <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-chart-pie"></i></div>
-                                        Despesas por ano
-                                    </a -->
+                            
                                     <a class="nav-link" href="{% url 'list_categoria' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-list-check"></i></div>
                                         Gerenciar categorias

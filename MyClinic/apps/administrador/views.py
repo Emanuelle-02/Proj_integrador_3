@@ -8,6 +8,8 @@ from django.views.generic import CreateView, DeleteView, UpdateView
 
 from apps.accounts.forms import DoctorForm, RecepcionistForm
 from apps.accounts.models import User
+from apps.recepcionista.forms import IncomeForm
+from apps.recepcionista.models import Income
 
 from .forms import CategoryForm, ExpensesForm
 from .models import Category, Expenses
@@ -108,7 +110,7 @@ class RecepcionistDeleteView(LoginRequiredMixin, DeleteView):
         return self.delete(request, *args, **kwargs)
 
 
-# DESPESAS
+# Fluxo de caixa - saída
 class ListarDespesasView(LoginRequiredMixin, View):
     login_url = "/admin_login"
 
@@ -198,3 +200,30 @@ class DeleteCategoriaView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+# Fluxo de caixa - Entrada
+class ListCaixaView(LoginRequiredMixin, View):
+    login_url = "/admin_login"
+
+    def get(self, request):
+        rendas = Income.objects.all()
+        paginator = Paginator(rendas, 5)
+        pagina_num = request.GET.get("page")
+        obj_pagina = Paginator.get_page(paginator, pagina_num)
+        context = {
+            "rendas": rendas,
+            "obj_pagina": obj_pagina,
+        }
+        return render(request, "caixa/list_caixa.html", context)
+
+
+class CaixaDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "/admin_login"
+    model = Income
+    success_url = "/caixa/list_caixa"
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+
+

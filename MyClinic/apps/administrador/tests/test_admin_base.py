@@ -46,6 +46,10 @@ class AdminTestBase(TestCase):
         doctor = Doctor.objects.create(user=doctor)
         return doctor
 
+    def login(self):
+        user_logged = self.client.login(username='administrador1', password='clinica123')
+        return user_logged
+
     def tearDown(self):
         print("\nTeste finalizado")
         return super().tearDown()

@@ -6,6 +6,17 @@ from .models import *
 
 
 class DoctorForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(DoctorForm, self).__init__(*args, **kwargs)
+        self.fields["first_name"].label = "Nome"
+        self.fields["last_name"].label = "Sobrenome"
+        self.fields["username"].label = "Nome de usuário"
+        self.fields["phone"].label = "Telefone"
+        self.fields["city"].label = "Cidade"
+        self.fields["specialization"].label = "Especialização"
+        self.fields["password1"].label = "Senha"
+        self.fields["password2"].label = "Confirmar senha"
+
     class Meta(UserCreationForm.Meta):
         model = User
         fields = [
@@ -28,6 +39,16 @@ class DoctorForm(UserCreationForm):
 
 
 class RecepcionistForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(RecepcionistForm, self).__init__(*args, **kwargs)
+        self.fields["first_name"].label = "Nome"
+        self.fields["last_name"].label = "Sobrenome"
+        self.fields["username"].label = "Nome de usuário"
+        self.fields["phone"].label = "Telefone"
+        self.fields["city"].label = "Cidade"
+        self.fields["password1"].label = "Senha"
+        self.fields["password2"].label = "Confirmar senha"
+
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ["first_name", "last_name", "username", "email", "phone", "city"]

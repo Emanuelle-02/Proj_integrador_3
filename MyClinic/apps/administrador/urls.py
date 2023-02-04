@@ -23,7 +23,10 @@ urlpatterns = [
         name="recepcionist_create",
     ),
     path("delete_recepcionista/<int:pk>", RecepcionistDeleteView.as_view(), name="recepcionist_delete"),
-    # Financeiro - Despesas
+    # Fluxo de caixa - Entradas
+    path("caixa/list_caixa", ListCaixaView.as_view(), name="list_caixa"),
+    path("delete_caixa/<int:pk>", CaixaDeleteView.as_view(), name="delete_caixa"),
+    # Fluxo de caixa - Saídas
     path(
         "financeiro/list_despesas", ListarDespesasView.as_view(), name="list_despesas"
     ),
@@ -38,7 +41,7 @@ urlpatterns = [
         DespesaDeleteView.as_view(),
         name="delete_despesa",
     ),
-    # Financeiro - Categorias
+    # Fluxo de Caixa - Categorias
     path(
         "financeiro/categorias/list_categoria",
         ListarCategoriasView.as_view(),
