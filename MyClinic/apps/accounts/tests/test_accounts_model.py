@@ -17,3 +17,10 @@ class AccountsViewsTest(AccountTestBase):
             + str(doctor.user.specialization),
             str(doctor),
         )
+
+    def test_model_recepcionist(self):
+        recepcionist = self.create_test_recepcionist()
+        self.assertEqual(
+            str(recepcionist.user.first_name) + " " + str(recepcionist.user.last_name),
+            str(recepcionist),
+        )

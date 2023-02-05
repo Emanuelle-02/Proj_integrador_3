@@ -56,7 +56,7 @@ class AccountsViewsTest(AccountTestBase):
         user = self.create_test_recepcionist()
         response = self.client.post(
             reverse("login_recepcionist"),
-            {"username": user.username, "password": "clinica123"},
+            {"username": user.user.username, "password": "clinica123"},
         )
         self.assertEqual(response.status_code, 302)
 
@@ -64,7 +64,7 @@ class AccountsViewsTest(AccountTestBase):
         user = self.create_test_recepcionist()
         response = self.client.post(
             reverse("login_recepcionist"),
-            {"username": user.username, "password": "senha123"},
+            {"username": user.user.username, "password": "senha123"},
         )
 
         self.assertEqual(response.status_code, 401)
@@ -114,7 +114,7 @@ class AccountsViewsTest(AccountTestBase):
         user = self.create_test_recepcionist()
         response = self.client.post(
             reverse("login_doctor"),
-            {"username": user.username, "password": "clinica123"},
+            {"username": user.user.username, "password": "clinica123"},
         )
 
         self.assertEqual(response.status_code, 401)

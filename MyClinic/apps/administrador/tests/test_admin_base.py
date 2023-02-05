@@ -47,7 +47,9 @@ class AdminTestBase(TestCase):
         return doctor
 
     def login(self):
-        user_logged = self.client.login(username='administrador1', password='clinica123')
+        user_logged = self.client.login(
+            username="administrador1", password="clinica123"
+        )
         return user_logged
 
     def tearDown(self):

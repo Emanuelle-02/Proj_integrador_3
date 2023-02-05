@@ -15,8 +15,14 @@ class AdminModelsTest(AdminTestBase):
         self.assertTrue(isinstance(cat, Category))
         self.assertEqual(cat.__str__(), cat.name)
 
-    def create_expense(self, description="Nova despesa", value = 10):
-        return Expenses.objects.create(description=description, category= self.create_category(), value=value, date=timezone.now(), user=self.create_test_user())
+    def create_expense(self, description="Nova despesa", value=10):
+        return Expenses.objects.create(
+            description=description,
+            category=self.create_category(),
+            value=value,
+            date=timezone.now(),
+            user=self.create_test_user(),
+        )
 
     def test_expense_creation(self):
         e = self.create_expense()

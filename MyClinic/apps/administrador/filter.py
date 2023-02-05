@@ -10,9 +10,9 @@ class DoctorFilter(FilterSet):
     specialization = CharFilter(
         lookup_expr="icontains", widget=forms.TextInput(attrs={"class": "form-control"})
     )
-    #medico = ChoiceFilter(
+    # medico = ChoiceFilter(
     #    choices=USER_MEDICO, widget=forms.Select(attrs={"class": "form-control"})
-    #)
+    # )
 
     class Meta:
         model = User

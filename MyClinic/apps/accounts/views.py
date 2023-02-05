@@ -24,7 +24,7 @@ class Login(View):
         return render(request, "login/login.html")
 
     def post(self, request):
-        #if request.method == "POST":
+        # if request.method == "POST":
         context = {"data": request.POST}
         context2 = {"data": request.POST}
         username = request.POST["username"]
@@ -59,13 +59,13 @@ class Login_Reception(View):
         return render(request, "login/login_recepcionist.html")
 
     def post(self, request):
-        #if request.method == "POST":
+        # if request.method == "POST":
         context = {"data": request.POST}
         context2 = {"data": request.POST}
         username = request.POST["username"]
         password = request.POST["password"]
 
-            # if username and password:
+        # if username and password:
         user = authenticate(username=username, password=password)
         if user:
             if user.is_recepcionist:
@@ -94,7 +94,7 @@ class Login_Doctor(View):
         return render(request, "login/login_doctor.html")
 
     def post(self, request):
-        #if request.method == "POST":
+        # if request.method == "POST":
         context = {"data": request.POST}
         context2 = {"data": request.POST}
         username = request.POST["username"]

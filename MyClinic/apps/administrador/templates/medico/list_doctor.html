@@ -34,12 +34,13 @@
             <tbody>
                 {% for doctor in obj_pagina %}
                 <tr>
-                    <td>{{doctor.first_name}}</td>
-                    <td>{{doctor.specialization}}</td>
-                    <td>{{doctor.email}}</td>
-                    <td>{{doctor.phone}}</td>
+                    <td>{{doctor.user.first_name}}</td>
+                    <td>{{doctor.user.specialization}}</td>
+                    <td>{{doctor.user.email}}</td>
+                    <td>{{doctor.user.phone}}</td>
                     <td>
-                        <a href="{% url 'doctor_delete' doctor.id %}" class="btn btn-secondary btn-sm">Remover</a>
+                        <a href="{% url 'doctor_create' doctor.user.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                        <a href="{% url 'doctor_delete' doctor.user.id %}" class="btn btn-secondary btn-sm">Remover</a>
                     </td>  
                 </tr>
                 {% endfor %}

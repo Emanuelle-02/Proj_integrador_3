@@ -8,6 +8,11 @@ urlpatterns = [
     path("index/", Index.as_view(), name="index"),
     path("medico/list_doctor", ListarDoctorView.as_view(), name="list_doctor"),
     path("cadastrar_medico", DoctorCreateView.as_view(), name="doctor_create"),
+    path(
+        "update_medico/<int:pk>",
+        DoctorUpdateView.as_view(),
+        name="doctor_create",
+    ),
     path("delete_medico/<int:pk>", DoctorDeleteView.as_view(), name="doctor_delete"),
     path(
         "cadastrar_recepcionista",
@@ -15,14 +20,20 @@ urlpatterns = [
         name="recepcionist_create",
     ),
     path(
-        "recepcionista/list_recepcionist", ListarRecepcionistView.as_view(), name="list_recepcionist"
+        "recepcionista/list_recepcionist",
+        ListarRecepcionistView.as_view(),
+        name="list_recepcionist",
     ),
     path(
         "update_recepcionista/<int:pk>",
         RecepcionistUpdateView.as_view(),
         name="recepcionist_create",
     ),
-    path("delete_recepcionista/<int:pk>", RecepcionistDeleteView.as_view(), name="recepcionist_delete"),
+    path(
+        "delete_recepcionista/<int:pk>",
+        RecepcionistDeleteView.as_view(),
+        name="recepcionist_delete",
+    ),
     # Fluxo de caixa - Entradas
     path("caixa/list_caixa", ListCaixaView.as_view(), name="list_caixa"),
     path("delete_caixa/<int:pk>", CaixaDeleteView.as_view(), name="delete_caixa"),

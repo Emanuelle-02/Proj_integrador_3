@@ -34,7 +34,7 @@ class DoctorForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_doctor = True
         user.save()
-        doctor = Doctor.objects.create(user=user)
+        doctor = Doctor.objects.update_or_create(user=user)
         return user
 
 
@@ -58,4 +58,5 @@ class RecepcionistForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_recepcionist = True
         user.save()
+        recepcionist = Recepcionist.objects.update_or_create(user=user)
         return user

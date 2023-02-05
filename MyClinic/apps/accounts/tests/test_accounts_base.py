@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.test import TestCase
 
-from apps.accounts.models import Doctor, User
+from apps.accounts.models import Doctor, Recepcionist, User
 
 
 class AccountTestBase(TestCase):
@@ -29,6 +29,7 @@ class AccountTestBase(TestCase):
         recepcionist.set_password("clinica123")
         recepcionist.is_recepcionist = True
         recepcionist.save()
+        recepcionist = Recepcionist.objects.create(user=recepcionist)
         return recepcionist
 
     def create_test_doctor(self):

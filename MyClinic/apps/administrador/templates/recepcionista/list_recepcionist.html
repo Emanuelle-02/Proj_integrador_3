@@ -35,13 +35,14 @@
             <tbody>
                 {% for recepcionist in obj_pagina %}
                 <tr>
-                    <td>{{recepcionist.first_name}}</td>
-                    <td>{{recepcionist.email}}</td>
-                    <td>{{recepcionist.phone}}</td>
-                    <td>{{recepcionist.city}}</td>
+                    <td>{{recepcionist.user.first_name}}</td>
+                    <td>{{recepcionist.user.email}}</td>
+                    <td>{{recepcionist.user.phone}}</td>
+                    <td>{{recepcionist.user.city}}</td>
                     <td>
-                        <a href="{% url 'recepcionist_create' recepcionist.id %}" class="btn btn-secondary btn-sm">Editar</a>
-                        <a href="{% url 'recepcionist_delete' recepcionist.id %}" class="btn btn-secondary btn-sm">Remover</a>
+                        
+                        <a href="{% url 'recepcionist_create' recepcionist.user.id %}" class="btn btn-secondary btn-sm">Editar</a>
+                        <a href="{% url 'recepcionist_delete' recepcionist.user.id %}" class="btn btn-secondary btn-sm">Remover</a>
                     </td>  
                 </tr>
                 {% endfor %}

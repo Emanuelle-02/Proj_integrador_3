@@ -1,13 +1,16 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from apps.accounts.forms import DoctorForm, RecepcionistForm
-from apps.accounts.models import User
+from apps.accounts.models import Doctor, Recepcionist, User
 from apps.recepcionista.forms import IncomeForm
 from apps.recepcionista.models import Income
 
@@ -25,7 +28,7 @@ class ListarDoctorView(LoginRequiredMixin, View):
     login_url = "/admin_login"
 
     def get(self, request):
-        medico = User.objects.filter(is_doctor=True)
+        medico = Doctor.objects.all()
         paginator = Paginator(medico, 4)
         pagina_num = request.GET.get("page")
         obj_pagina = Paginator.get_page(paginator, pagina_num)
@@ -51,22 +54,35 @@ class DoctorCreateView(LoginRequiredMixin, CreateView):
         user = form.save()
         login(self.request, user)
         return redirect("/medico/list_doctor")
-        
+
+
+class DoctorUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = "/admin_login"
+    model = User
+    form_class = DoctorForm
+    template_name = "create_form.html"
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect("/medico/list_doctor")
+
 
 class DoctorDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "/admin_login"
-    model = User
+    model = Doctor
     success_url = "/medico/list_doctor"
-    
+
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
 
-class ListarRecepcionistView(LoginRequiredMixin, View):
+class ListarRecepcionistView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
 
     def get(self, request):
-        recepcionista = User.objects.filter(is_recepcionist=True)
+        recepcionista = Recepcionist.objects.all()
+        # recepcionista = User.objects.filter(is_recepcionist=True)
         paginator = Paginator(recepcionista, 4)
         pagina_num = request.GET.get("page")
         obj_pagina = Paginator.get_page(paginator, pagina_num)
@@ -99,13 +115,21 @@ class RecepcionistUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = RecepcionistForm
     template_name = "create_form.html"
-    success_url = "/recepcionista/list_recepcionist"
+    # success_url = "/recepcionista/list_recepcionist"
 
-class RecepcionistDeleteView(LoginRequiredMixin, DeleteView):
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect("/recepcionista/list_recepcionist")
+
+
+class RecepcionistDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     login_url = "/admin_login"
-    model = User
-    success_url = "/recepcionista/list_recepcionist"
-    
+    model = Recepcionist
+    # template_name = 'recepcionista/delete_user_confirm.html'
+    success_message = "Recepcionista removida"
+    success_url = reverse_lazy("list_recepcionist")
+
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
@@ -201,6 +225,7 @@ class DeleteCategoriaView(LoginRequiredMixin, DeleteView):
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
+
 # Fluxo de caixa - Entrada
 class ListCaixaView(LoginRequiredMixin, View):
     login_url = "/admin_login"
@@ -224,6 +249,3 @@ class CaixaDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
-
-
-
