@@ -16,36 +16,6 @@ class AdminTestBase(TestCase):
         admin.save()
         return admin
 
-    def create_test_recepcionist(self):
-        recepcionist = User.objects.create_user(
-            first_name="recepcionist",
-            last_name="R.",
-            email="recepcion@gmail.com",
-            username="recepcionista1",
-            city="Encanto",
-            phone="91587-4569",
-        )
-        recepcionist.set_password("clinica123")
-        recepcionist.is_recepcionist = True
-        recepcionist.save()
-        return recepcionist
-
-    def create_test_doctor(self):
-        doctor = User.objects.create_user(
-            first_name="doctor1",
-            last_name="D.",
-            email="doctor@gmail.com",
-            username="doctor1",
-            city="Pau dos Ferros",
-            phone="98765-4321",
-            specialization="Pediatra",
-        )
-        doctor.set_password("clinica123")
-        doctor.is_doctor = True
-        doctor.save()
-        doctor = Doctor.objects.create(user=doctor)
-        return doctor
-
     def login(self):
         user_logged = self.client.login(
             username="administrador1", password="clinica123"

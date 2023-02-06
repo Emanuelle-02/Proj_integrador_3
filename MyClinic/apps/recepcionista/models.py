@@ -39,6 +39,7 @@ class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateField(default=now)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=5)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.patient

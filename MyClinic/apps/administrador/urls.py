@@ -4,6 +4,7 @@ from apps.administrador.views import *
 
 from .views import *
 
+# app_name = "administrador"
 urlpatterns = [
     path("index/", Index.as_view(), name="index"),
     path("medico/list_doctor", ListarDoctorView.as_view(), name="list_doctor"),

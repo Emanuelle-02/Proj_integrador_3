@@ -24,7 +24,7 @@ class Index(View):
         return render(request, "index.html")
 
 
-class ListarDoctorView(LoginRequiredMixin, View):
+class ListarDoctorView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
 
     def get(self, request):
@@ -123,11 +123,11 @@ class RecepcionistUpdateView(LoginRequiredMixin, UpdateView):
         return redirect("/recepcionista/list_recepcionist")
 
 
-class RecepcionistDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class RecepcionistDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "/admin_login"
     model = Recepcionist
     # template_name = 'recepcionista/delete_user_confirm.html'
-    success_message = "Recepcionista removida"
+    # success_message = "Recepcionista removida"
     success_url = reverse_lazy("list_recepcionist")
 
     def get(self, request, *args, **kwargs):
@@ -135,7 +135,7 @@ class RecepcionistDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView
 
 
 # Fluxo de caixa - saída
-class ListarDespesasView(LoginRequiredMixin, View):
+class ListarDespesasView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
 
     def get(self, request):

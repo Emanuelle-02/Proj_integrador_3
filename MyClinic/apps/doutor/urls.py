@@ -9,4 +9,14 @@ urlpatterns = [
         ListDocAppointmentView.as_view(),
         name="list_appointment",
     ),
+    path(
+        "conclude_appointment/<int:pk>",
+        conclude_appointment_view,
+        name="conclude_appointment",
+    ),
+    path(
+        "complete_appointments",
+        ListDocAppointmentCompleteView.as_view(),
+        name="list_complete_appointment",
+    ),
 ]

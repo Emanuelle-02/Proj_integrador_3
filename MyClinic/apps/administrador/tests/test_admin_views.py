@@ -1,9 +1,12 @@
 # import requests
+import datetime
+
 from django.contrib.messages import get_messages
 from django.test import Client
 from django.urls import reverse, reverse_lazy
 
 from apps.accounts.models import User
+from apps.administrador.models import Category, Expenses
 
 from .test_admin_base import AdminTestBase
 
@@ -41,9 +44,32 @@ class AdminViewsTest(AdminTestBase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "despesas/list_despesas.html")
 
+    def test_create_category(self):
+        self.create_test_user()
+        self.login()
+        response_200 = self.client.post(
+            reverse("categoria_form"), data={"name": "Limpeza"}, follow=True
+        )
+        self.assertEqual(response_200.status_code, 200)
+
     def test_list_category_view(self):
         self.create_test_user()
         self.login()
         response = self.client.get(reverse("list_categoria"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "despesas/list_categoria.html")
+
+    def test_create_expense(self):
+        self.create_test_user()
+        self.login()
+        response = self.client.post(
+            reverse("despesa_form"),
+            data={
+                "description": "Teste qualquer",
+                "category": "Test",
+                "value": 200,
+                "date": datetime.date(2023, 2, 4),
+            },
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
