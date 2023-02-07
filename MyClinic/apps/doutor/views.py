@@ -3,8 +3,10 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import View
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+from apps.doutor.forms import AppointmentPrescriptionForm
 from apps.recepcionista.models import Appointment
 
 
@@ -44,6 +46,17 @@ class ListDocAppointmentCompleteView(LoginRequiredMixin, View):
             "obj_pagina": obj_pagina,
         }
         return render(request, "consulta/list_complete_appointment.html", context)
+
+class AppointmentDataView(LoginRequiredMixin, UpdateView):
+    login_url = "/recepcionista_login"
+    model = Appointment
+    form_class = AppointmentPrescriptionForm
+    template_name = "consulta/appointment_form.html"
+    success_url = "/list_doc_appointments"
+
+class AppointmentDatailView(LoginRequiredMixin, DetailView):
+    login_url = "/recepcionista_login"
+    model = Appointment
 
 
 def conclude_appointment_view(request, pk):

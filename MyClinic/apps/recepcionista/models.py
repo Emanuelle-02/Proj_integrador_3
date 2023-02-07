@@ -40,6 +40,21 @@ class Appointment(models.Model):
     date = models.DateField(default=now)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=5)
     status = models.BooleanField(default=False)
+    sintoms = models.TextField(default="A informar...")
+    medication = models.TextField(default="A informar...")
+    exam = models.TextField(default="A informar...")
 
     def __str__(self):
         return self.patient
+
+class Exam(models.Model):
+    patient = models.CharField(max_length=255)
+    age = models.CharField(max_length=3)
+    gender = models.CharField(
+        max_length=10, choices=GENDER_CHOICES, default="----------"
+    )
+    type = models.TextField(default="A informar...")
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    date = models.DateField(default=now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=5)
+    status = models.BooleanField(default=False)

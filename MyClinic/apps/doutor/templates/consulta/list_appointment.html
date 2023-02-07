@@ -41,7 +41,8 @@
                         
                         {% if appointment.status == False %}
                         <td>
-                            <a href="{% url 'conclude_appointment' appointment.id %}" class="btn btn-danger btn-sm">Concluída</a>
+                            <a href="{% url 'appointment_form' appointment.id %}" class="btn btn-primary btn-sm" alt="Lançar consulta"><i class="fa-solid fa-notes-medical"></i> Lançar prontuário</a>
+                            <a href="{% url 'conclude_appointment' appointment.id %}" class="btn btn-danger btn"><i class="fa-solid fa-check"></i></a>
                         </td>
                         {% endif %}
                     </tr>
