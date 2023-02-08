@@ -6,9 +6,9 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from apps.recepcionista.forms import AppointmentForm, IncomeForm
+from apps.recepcionista.forms import AppointmentForm, ExamForm, IncomeForm
 
-from .models import Appointment, Income
+from .models import Appointment, Exam, Income
 
 # Create your views here.
 
@@ -17,7 +17,14 @@ class Recepcionist_Index(LoginRequiredMixin, View):
     login_url = "/recepcionista_login"
 
     def get(self, request):
-        return render(request, "recepcionist_index.html")
+        consultas = Appointment.objects.filter(status=False).count()
+        exames = Exam.objects.filter(status=False).count()
+        
+        context = {
+            "consultas": consultas,
+            "exames": exames,
+        }
+        return render(request, "recepcionist_index.html", context)
 
 
 class ListIncomeView(LoginRequiredMixin, View):
@@ -69,7 +76,7 @@ class ListAppointmentView(LoginRequiredMixin, View):
     login_url = "/recepcionista_login"
 
     def get(self, request):
-        consulta = Appointment.objects.all()
+        consulta = Appointment.objects.filter(status=False)
         paginator = Paginator(consulta, 5)
         pagina_num = request.GET.get("page")
         obj_pagina = Paginator.get_page(paginator, pagina_num)
@@ -108,3 +115,78 @@ class AppointmentDeleteView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+class ListExamView(LoginRequiredMixin, View):
+    login_url = "/recepcionista_login"
+
+    def get(self, request):
+        exame = Exam.objects.filter(status=False)
+        paginator = Paginator(exame, 5)
+        pagina_num = request.GET.get("page")
+        obj_pagina = Paginator.get_page(paginator, pagina_num)
+        context = {
+            "exame": exame,
+            "obj_pagina": obj_pagina,
+        }
+        return render(request, "exames/list_exams.html", context)
+    
+
+class ExamCreateView(LoginRequiredMixin, CreateView):
+    login_url = "/recepcionista_login"
+    model = Exam
+    form_class = ExamForm
+    template_name = "exames/exam_form.html"
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.user = self.request.user
+        obj.save()
+        return HttpResponseRedirect("list_exams")
+
+
+class ExamEditView(LoginRequiredMixin, UpdateView):
+    login_url = "/recepcionista_login"
+    model = Exam
+    form_class = ExamForm
+    template_name = "exames/exam_form.html"
+    success_url = "/list_exams"
+
+
+class ExamDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "/recepcionista_login"
+    model = Exam
+    success_url = "/list_exams"
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+
+class ListDoneAppointmentView(LoginRequiredMixin, View):
+    login_url = "/recepcionista_login"
+
+    def get(self, request):
+        consulta = Appointment.objects.filter(status=True)
+        paginator = Paginator(consulta, 5)
+        pagina_num = request.GET.get("page")
+        obj_pagina = Paginator.get_page(paginator, pagina_num)
+        context = {
+            "consulta": consulta,
+            "obj_pagina": obj_pagina,
+        }
+        return render(request, "consultas/done_appointment_list.html", context)
+    
+
+class ListDoneExamView(LoginRequiredMixin, View):
+    login_url = "/recepcionista_login"
+
+    def get(self, request):
+        exame = Exam.objects.filter(status=True)
+        paginator = Paginator(exame, 5)
+        pagina_num = request.GET.get("page")
+        obj_pagina = Paginator.get_page(paginator, pagina_num)
+        context = {
+            "exame": exame,
+            "obj_pagina": obj_pagina,
+        }
+        return render(request, "exames/list_done_exams.html", context)

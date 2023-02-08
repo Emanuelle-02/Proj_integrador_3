@@ -1,4 +1,4 @@
-{% extends 'base_recepcionist.html' %}
+{% extends 'base_doctor.html' %}
 {% block content %}
 
 <div class="my-3 p-3 bg-body rounded shadow-sm">
@@ -7,8 +7,8 @@
             <div class="col-md-10">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{% url 'list_receita' %}">Minha receita</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Lançar ganho</li>
+                        <li class="breadcrumb-item"><a href="{% url 'list_appointment' %}">Minhas consultas</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Lançamentos</li>
                     </ol>
                 </nav>
             </div>
@@ -36,32 +36,37 @@
       <form method="post">
         {% csrf_token %}
 
-        <div class="card-body">
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right">Descrição:</label>
-          <div class="col-sm-12 col-md-7">{{ form.description }}</div>
-        </div>
-
-        <div class="card-body">
-          <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right">Categoria:</label>
-          <div class="col-sm-12 col-md-7">{{ form.type_income }}</div>
+        <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right">Paciente:</label>
+            <div class="col-sm-12 col-md-7"> {{form.patient}} </div>
+            <label class="col-form-label text-md-right">Idade:</label>
+            <div class="col-sm-12 col-md-7"> {{form.age}} </div>
         </div>
 
         <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right">Valor</label>
-          <div class="col-sm-12 col-md-7">{{ form.value }}</div>
+            <label class="col-form-label text-md-right">Sintomas</label>
+            <div class="col-sm-12 col-md-7">{{ form.sintoms}}</div>
         </div>
 
         <div class="form-group row mb-4">
-          <label class="col-form-label text-md-right">Data</label>
-          <div class="col-sm-12 col-md-3">{{ form.date}}</div>
+            <label class="col-form-label text-md-right">Medicação</label>
+            <div class="col-sm-12 col-md-7">{{ form.medication}}</div>
+        </div>
+        
+        <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right">Requisição</label>
+            <div class="col-sm-12 col-md-7">{{ form.exam}}</div>
         </div>
 
+        <div class="form-group row mb-4">
+            <label class="col-form-label text-md-right">Data</label>
+            <div class="col-sm-12 col-md-3">{{ form.date}}</div>
+        </div>
+        
         <div class="form-group row mb-4">
           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
             <div class="col-sm-12 col-md-7">
-              <button class="btn btn-primary">Lançar ganho</button>
+              <button class="btn btn-primary">Salvar lançamento</button>
             </div>
           </div>
         </div>   

@@ -7,14 +7,10 @@
             <div class="col-md-10">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Gerenciar receita</li>
+                        <li class="breadcrumb-item">Consultas concluídas</li>
                         <li class="breadcrumb-item active" aria-current="page">Lançamentos</li>
                     </ol>
                 </nav>
-            </div>
-
-            <div class="col-md-2">
-                <a href="{% url 'receita_form' %}" class="btn btn-primary btn-sm">Lançar receita</a>
             </div>
         </div>
     </div>
@@ -24,26 +20,23 @@
             <table class="table table-stripped table-hover">
                 <thead>
                     <tr>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Categoria</th>
-                        <th>Recepcionista</th>
+                        <th>Paciente</th>
+                        <th>Genero</th>
+                        <th>Idade</th>
+                        <th>Tipo</th>
+                        <th>Médico</th>
                         <th>Data</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for income in obj_pagina %}
+                    {% for appointment in obj_pagina %}
                     <tr>
-                        <td>{{income.description}}</td>
-                        <td>{{income.value}}</td>
-                        <td>{{income.type_income}}</td>
-                        <td>{{income.user}}</td>
-                        <td>{{income.date}}</td>
-                        <td>
-                            <a href="{% url 'receita_form' income.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{% url 'delete_receita' income.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a>
-                        </td>
+                        <td>{{appointment.patient}}</td>
+                        <td>{{appointment.gender}}</td>
+                        <td>{{appointment.age}}</td>
+                        <td>{{appointment.description}}</td>
+                        <td>{{appointment.doctor}}</td>
+                        <td>{{appointment.date}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -58,10 +51,10 @@
                         <a class="page-link" href="?page=1">&laquo; 1</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ obj_pagina.previous_page_number }}">Anterior</a>
+                         <a class="page-link" href="?page={{ obj_pagina.previous_page_number }}">Anterior</a>
                     </li>
                     {% endif %}
-                    
+                            
                     {% if obj_pagina.has_next %}
                     <li class="page-item"> 
                         <a class="page-link" href="?page={{ obj_pagina.next_page_number }}">Próximo</a>
@@ -71,7 +64,6 @@
                     </li>
                     {% endif %}
                 </ul>
-                
             </div>
         </div>
     </div>

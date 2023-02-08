@@ -7,7 +7,7 @@
             <div class="col-md-10">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Gerenciar consultas</li>
+                        <li class="breadcrumb-item">Minhas consultas</li>
                         <li class="breadcrumb-item active" aria-current="page">Lançamentos</li>
                     </ol>
                 </nav>
@@ -41,7 +41,7 @@
                         
                         {% if appointment.status == False %}
                         <td>
-                            <a href="{% url 'appointment_form' appointment.id %}" class="btn btn-primary btn-sm" alt="Lançar consulta"><i class="fa-solid fa-notes-medical"></i> Lançar prontuário</a>
+                            <a href="{% url 'appoint_form' appointment.id %}" class="btn btn-primary btn-sm" alt="Lançar consulta"><i class="fa-solid fa-notes-medical"></i> Lançar prontuário</a>
                             <a href="{% url 'conclude_appointment' appointment.id %}" class="btn btn-danger btn"><i class="fa-solid fa-check"></i></a>
                         </td>
                         {% endif %}

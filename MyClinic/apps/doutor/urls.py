@@ -17,11 +17,27 @@ urlpatterns = [
     path(
         "appointment_data/<int:pk>",
         AppointmentDataView.as_view(),
-        name="appointment_form",
+        name="appoint_form",
     ),
     path(
         "complete_appointments",
         ListDocAppointmentCompleteView.as_view(),
         name="list_complete_appointment",
+    ),
+    # EXAMES
+    path(
+        "list_doc_exam",
+        ListDocExamView.as_view(),
+        name="list_exam",
+    ),
+    path(
+        "conclude_exam/<int:pk>",
+        conclude_exam_view,
+        name="conclude_exam",
+    ),
+    path(
+        "complete_exam",
+        ListDocExamCompleteView.as_view(),
+        name="list_complete_exam",
     ),
 ]

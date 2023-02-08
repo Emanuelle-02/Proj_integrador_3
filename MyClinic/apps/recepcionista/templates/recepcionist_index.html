@@ -1,5 +1,177 @@
 {% extends 'base_recepcionist.html' %}
 {% load static %}
 {% block content %}
-<h1>Início</h1>
+
+<div class="my-3 p-3 bg-body rounded shadow">
+    <div class="container">   
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">MyClinic</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="container-fluid px-4">
+            <div style="margin: 65px;">
+                {% if user.is_authenticated %}
+                    <h5 class="color_string"style="margin-top: 50px;"> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>  {{user.username}} {{user.last_name}}</h5>
+                {% endif %}
+                <hr>
+                <head>
+                    <style>
+                        body{
+                            
+                            background:#FAFAFA;
+                        }
+                        .order-card {
+                            color: #fff;
+                        }
+                
+                        .bg-c-blue {
+                            background: linear-gradient(45deg,#4099ff,#73b4ff);
+                        }
+                
+                        .bg-c-green {
+                            background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+                        }
+                
+                        .bg-c-yellow {
+                            background: linear-gradient(45deg,#FFB64D,#ffcb80);
+                        }
+                
+                        .bg-c-pink {
+                            background: linear-gradient(45deg,#FF5370,#ff869a);
+                        }
+                
+                
+                        .card {
+                            border-radius: 5px;
+                            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                            box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+                            border: none;
+                            margin-bottom: 30px;
+                            -webkit-transition: all 0.3s ease-in-out;
+                            transition: all 0.3s ease-in-out;
+                        }
+                
+                        .card .card-block {
+                            padding: 25px;
+                        }
+                
+                        .order-card i {
+                            font-size: 26px;
+                        }
+                
+                        .f-left {
+                            float: left;
+                        }
+                
+                        .f-right {
+                            float: right;
+                        }
+                    </style>
+                </head>
+                
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+                <div class="container mt-5">
+                    <h2>Atendimentos pendentes</h2>
+                    <div class="row">
+                        <div class="col-md-4 col-xl-4 mt-5">
+                            <a href="{% url 'appointment_list' %}" style="text-decoration: none">
+                                <div class="card bg-c-blue order-card">
+                                    <div class="card-block">
+                                        <h6 class="m-b-20">CONSULTAS</h6>
+                                        <h2 class="text-right"><i class="fa-solid fa-stethoscope"></i><span> {{consultas}}</span></h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xl-4 mt-5">
+                            <a href="{% url 'exams_list' %}" style="text-decoration: none;">
+                                <div class="card bg-c-pink order-card">    
+                                    <div class="card-block">
+                                        <h6 class="m-b-20">EXAMES</h6>
+                                        <h2 class="text-right"><i class="fa-solid fa-folder-plus"></i><span> {{exames}}</span></h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>   
+        </div>
+    </div>
+</div>
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+	background: #f9f9f9;
+	font-family: "Roboto", sans-serif;
+}
+
+.main-content {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.stat-card {
+	background: #fff;
+	padding: 25px;
+	margin-bottom: 25px;
+	border-radius: 5px;
+	overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s;
+}
+.stat-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+.stat-card__icon-circle {
+	height: 60px;
+	width: 60px;
+	border-radius: 60px;
+	background: rgba(0, 123, 255, 0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.stat-card__icon-circle i {
+	font-size: 30px;
+	color: #007bff;
+}
+.stat-card__icon.stat-card__icon--success .stat-card__icon-circle {
+	background: rgba(40, 167, 69, 0.2);
+}
+.stat-card__icon.stat-card__icon--success .stat-card__icon-circle i {
+	color: #28a745;
+}
+.stat-card__icon.stat-card__icon--danger .stat-card__icon-circle {
+	background: rgba(220, 53, 69, 0.2);
+}
+.stat-card__icon.stat-card__icon--danger .stat-card__icon-circle i {
+	color: #dc3545;
+}
+.stat-card__icon.stat-card__icon--warning .stat-card__icon-circle {
+	background: rgba(255, 193, 7, 0.2);
+}
+.stat-card__icon.stat-card__icon--warning .stat-card__icon-circle i {
+	color: #ffc107;
+}
+.stat-card__icon.stat-card__icon--primary .stat-card__icon-circle {
+	background: rgba(0, 123, 255, 0.2);
+}
+.stat-card__icon.stat-card__icon--primary .stat-card__icon-circle i {
+	color: #007bff;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 {% endblock %}

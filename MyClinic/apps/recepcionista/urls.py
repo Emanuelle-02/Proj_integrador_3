@@ -21,6 +21,23 @@ urlpatterns = [
         AppointmentDeleteView.as_view(),
         name="delete_appointment",
     ),
+    path("list_done_appointments", ListDoneAppointmentView.as_view(), name="done_appointment_list"),
+    # EXAMES
+    path("list_exams", ListExamView.as_view(), name="exams_list"),
+    path(
+        "create_exam", ExamCreateView.as_view(), name="exam_form"
+    ),
+    path(
+        "edit_exam/<int:pk>",
+        ExamEditView.as_view(),
+        name="exam_form",
+    ),
+    path(
+        "delete_exam/<int:pk>",
+        ExamDeleteView.as_view(),
+        name="delete_exam",
+    ),
+    path("list_done_exams", ListDoneExamView.as_view(), name="exams_done_list"),
     # RECEITA
     path("list_receita", ListIncomeView.as_view(), name="list_receita"),
     path("create_income", IncomeCreateView.as_view(), name="receita_form"),

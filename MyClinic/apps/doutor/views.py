@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from apps.doutor.forms import AppointmentPrescriptionForm
-from apps.recepcionista.models import Appointment
+from apps.recepcionista.models import Appointment, Exam
 
 
 # Create your views here.
@@ -51,7 +51,7 @@ class AppointmentDataView(LoginRequiredMixin, UpdateView):
     login_url = "/recepcionista_login"
     model = Appointment
     form_class = AppointmentPrescriptionForm
-    template_name = "consulta/appointment_form.html"
+    template_name = "consulta/appoint_form.html"
     success_url = "/list_doc_appointments"
 
 class AppointmentDatailView(LoginRequiredMixin, DetailView):
@@ -64,3 +64,40 @@ def conclude_appointment_view(request, pk):
     appointment.status = True
     appointment.save()
     return redirect(reverse("list_appointment"))
+
+
+def conclude_exam_view(request, pk):
+    exam = Exam.objects.get(id=pk)
+    exam.status = True
+    exam.save()
+    return redirect(reverse("list_exam"))
+
+
+class ListDocExamView(LoginRequiredMixin, View):
+    login_url = "/medico_login"
+
+    def get(self, request):
+        exame = Exam.objects.filter(doctor=request.user.doctor, status=False)
+        paginator = Paginator(exame, 5)
+        pagina_num = request.GET.get("page")
+        obj_pagina = Paginator.get_page(paginator, pagina_num)
+        context = {
+            "exame": exame,
+            "obj_pagina": obj_pagina,
+        }
+        return render(request, "exame/list_exam.html", context)
+
+
+class ListDocExamCompleteView(LoginRequiredMixin, View):
+    login_url = "/medico_login"
+
+    def get(self, request):
+        exame = Exam.objects.filter(doctor=request.user.doctor, status=True)
+        paginator = Paginator(exame, 5)
+        pagina_num = request.GET.get("page")
+        obj_pagina = Paginator.get_page(paginator, pagina_num)
+        context = {
+            "exame": exame,
+            "obj_pagina": obj_pagina,
+        }
+        return render(request, "exame/list_complete_exam.html", context)

@@ -14,7 +14,8 @@
             </div>
 
             <div class="col-md-2">
-                <a href="{% url 'appointment_form' %}" class="btn btn-primary btn-sm">Lançar consulta</a>
+                <a href="{% url 'receita_form' %}" class="btn btn-dark btn-sm">Lançar receita</a>
+                <a href="{% url 'appointment_form' %}" class="btn btn-primary btn-sm  mt-2">Lançar consulta</a>
             </div>
         </div>
     </div>
@@ -42,8 +43,8 @@
                         <td>{{appointment.doctor}}</td>
                         <td>{{appointment.date}}</td>
                         <td>
-                            <a href="{% url 'appointment_form' appointment.id %}" class="btn btn-secondary btn-sm">Editar</a>
-                            <a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger btn-sm">Deletar</a>
+                            <a href="{% url 'appointment_form' appointment.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

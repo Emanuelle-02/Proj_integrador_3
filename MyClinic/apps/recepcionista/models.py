@@ -11,9 +11,15 @@ GENDER_CHOICES = (
 
 APPOINTMENT_CHOICES = {
     ("Consulta", "Consulta"),
-    ("Exame", "Exame"),
     ("Consulta e Exame", "Consulta e Exame"),
     ("Retorno", "Retorno"),
+}
+
+
+CATEGORY_CHOICES = {
+    ("Consulta", "Consulta"),
+    ("Exame", "Exame"),
+    ("Consulta e Exame", "Consulta e Exame"),
 }
 
 
@@ -22,6 +28,9 @@ class Income(models.Model):
     value = models.FloatField()
     date = models.DateField(default=now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    type_income = models.CharField(
+        max_length=20, choices=CATEGORY_CHOICES, default="----------"
+    )
 
     def __str__(self):
         return self.description
