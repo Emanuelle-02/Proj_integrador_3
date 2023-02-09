@@ -12,7 +12,14 @@ class AppointmentPrescriptionForm(ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ["patient", "age", "date", "sintoms", "medication", "exam",]
+        fields = [
+            "patient",
+            "age",
+            "date",
+            "sintoms",
+            "medication",
+            "exam",
+        ]
 
         widgets = {
             "gender": forms.Select(attrs={"class": "form-control"}),

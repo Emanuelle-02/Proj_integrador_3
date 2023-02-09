@@ -15,7 +15,16 @@ class Doctor_Index(View):
     login_url = "/medico_login"
 
     def get(self, request):
-        return render(request, "doc_index.html")
+        consultas = Appointment.objects.filter(
+            doctor=request.user.doctor, status=False
+        ).count()
+        exames = Exam.objects.filter(doctor=request.user.doctor, status=False).count()
+
+        context = {
+            "consultas": consultas,
+            "exames": exames,
+        }
+        return render(request, "doc_index.html", context)
 
 
 class ListDocAppointmentView(LoginRequiredMixin, View):
@@ -47,12 +56,14 @@ class ListDocAppointmentCompleteView(LoginRequiredMixin, View):
         }
         return render(request, "consulta/list_complete_appointment.html", context)
 
+
 class AppointmentDataView(LoginRequiredMixin, UpdateView):
     login_url = "/recepcionista_login"
     model = Appointment
     form_class = AppointmentPrescriptionForm
     template_name = "consulta/appoint_form.html"
     success_url = "/list_doc_appointments"
+
 
 class AppointmentDatailView(LoginRequiredMixin, DetailView):
     login_url = "/recepcionista_login"

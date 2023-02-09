@@ -19,7 +19,7 @@ class Recepcionist_Index(LoginRequiredMixin, View):
     def get(self, request):
         consultas = Appointment.objects.filter(status=False).count()
         exames = Exam.objects.filter(status=False).count()
-        
+
         context = {
             "consultas": consultas,
             "exames": exames,
@@ -130,7 +130,7 @@ class ListExamView(LoginRequiredMixin, View):
             "obj_pagina": obj_pagina,
         }
         return render(request, "exames/list_exams.html", context)
-    
+
 
 class ExamCreateView(LoginRequiredMixin, CreateView):
     login_url = "/recepcionista_login"
@@ -175,7 +175,7 @@ class ListDoneAppointmentView(LoginRequiredMixin, View):
             "obj_pagina": obj_pagina,
         }
         return render(request, "consultas/done_appointment_list.html", context)
-    
+
 
 class ListDoneExamView(LoginRequiredMixin, View):
     login_url = "/recepcionista_login"

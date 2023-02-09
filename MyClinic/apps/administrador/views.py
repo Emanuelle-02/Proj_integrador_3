@@ -20,11 +20,37 @@ from .models import Category, Expenses
 
 # Create your views here.
 class Index(View):
+    login_url = "/admin_login"
+
     def get(self, request):
-        return render(request, "index.html")
+        medicos = User.objects.filter(is_doctor=True, is_active=True).count()
+        recepcionistas = User.objects.filter(
+            is_recepcionist=True, is_active=True
+        ).count()
+        receitas = Income.objects.all()
+        despesas = Expenses.objects.all()
+        total_receita = 0
+        total_despesa = 0
+        saldo = 0
+
+        for despesa in despesas:
+            total_despesa += despesa.value
+        for receita in receitas:
+            total_receita += receita.value
+
+        saldo = total_receita - total_despesa
+
+        context = {
+            "medicos": medicos,
+            "recepcionistas": recepcionistas,
+            "total_receita": total_receita,
+            "total_despesa": total_despesa,
+            "saldo": saldo,
+        }
+        return render(request, "index.html", context)
 
 
-class ListarDoctorView(LoginRequiredMixin, ListView):
+class ListDoctorView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
 
     def get(self, request):
@@ -68,16 +94,7 @@ class DoctorUpdateView(LoginRequiredMixin, UpdateView):
         return redirect("/medico/list_doctor")
 
 
-class DoctorDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = "/admin_login"
-    model = Doctor
-    success_url = "/medico/list_doctor"
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-
-class ListarRecepcionistView(LoginRequiredMixin, ListView):
+class ListRecepcionistView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
 
     def get(self, request):
@@ -123,19 +140,8 @@ class RecepcionistUpdateView(LoginRequiredMixin, UpdateView):
         return redirect("/recepcionista/list_recepcionist")
 
 
-class RecepcionistDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = "/admin_login"
-    model = Recepcionist
-    # template_name = 'recepcionista/delete_user_confirm.html'
-    # success_message = "Recepcionista removida"
-    success_url = reverse_lazy("list_recepcionist")
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-
 # Fluxo de caixa - saída
-class ListarDespesasView(LoginRequiredMixin, ListView):
+class ListExpenseView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
 
     def get(self, request):
@@ -150,7 +156,7 @@ class ListarDespesasView(LoginRequiredMixin, ListView):
         return render(request, "despesas/list_despesas.html", context)
 
 
-class CreateDespesaView(LoginRequiredMixin, CreateView):
+class CreateExpenseView(LoginRequiredMixin, CreateView):
     login_url = "/admin_login"
     model = Expenses
     form_class = ExpensesForm
@@ -163,7 +169,7 @@ class CreateDespesaView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect("/financeiro/list_despesas")
 
 
-class DespesaUpdateView(LoginRequiredMixin, UpdateView):
+class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
     login_url = "/admin_login"
     model = Expenses
     form_class = ExpensesForm
@@ -171,7 +177,7 @@ class DespesaUpdateView(LoginRequiredMixin, UpdateView):
     success_url = "/financeiro/list_despesas"
 
 
-class DespesaDeleteView(LoginRequiredMixin, DeleteView):
+class ExpenseDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "/admin_login"
     model = Expenses
     success_url = "/financeiro/list_despesas"
@@ -181,7 +187,7 @@ class DespesaDeleteView(LoginRequiredMixin, DeleteView):
 
 
 # Categorias
-class ListarCategoriasView(LoginRequiredMixin, View):
+class ListCategoryView(LoginRequiredMixin, View):
     login_url = "/admin_login"
 
     def get(self, request):
@@ -196,7 +202,7 @@ class ListarCategoriasView(LoginRequiredMixin, View):
         return render(request, "despesas/list_categoria.html", context)
 
 
-class CreateCategoriaView(LoginRequiredMixin, CreateView):
+class CreateCategoryView(LoginRequiredMixin, CreateView):
     login_url = "/admin_login"
     model = Category
     form_class = CategoryForm
@@ -209,7 +215,7 @@ class CreateCategoriaView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect("/financeiro/categorias/list_categoria")
 
 
-class UpdateCategoriaView(LoginRequiredMixin, UpdateView):
+class UpdateCategoryView(LoginRequiredMixin, UpdateView):
     login_url = "/admin_login"
     model = Category
     form_class = CategoryForm
@@ -217,7 +223,7 @@ class UpdateCategoriaView(LoginRequiredMixin, UpdateView):
     success_url = "/financeiro/categorias/list_categoria"
 
 
-class DeleteCategoriaView(LoginRequiredMixin, DeleteView):
+class DeleteCategoryView(LoginRequiredMixin, DeleteView):
     login_url = "/admin_login"
     model = Category
     success_url = "/financeiro/categorias/list_categoria"
@@ -227,7 +233,7 @@ class DeleteCategoriaView(LoginRequiredMixin, DeleteView):
 
 
 # Fluxo de caixa - Entrada
-class ListCaixaView(LoginRequiredMixin, View):
+class ListAdminIncomeView(LoginRequiredMixin, View):
     login_url = "/admin_login"
 
     def get(self, request):
@@ -242,10 +248,34 @@ class ListCaixaView(LoginRequiredMixin, View):
         return render(request, "caixa/list_caixa.html", context)
 
 
-class CaixaDeleteView(LoginRequiredMixin, DeleteView):
+class AdminIncomeDeleteView(LoginRequiredMixin, DeleteView):
     login_url = "/admin_login"
     model = Income
     success_url = "/caixa/list_caixa"
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
+
+
+def desative_recepcionist(request, pk):
+    if request.method == "GET":
+        user = User.objects.get(id=pk)
+        if "check" in request.GET:
+            user.is_active = True
+        else:
+            user.is_active = False
+        user.save()
+        return redirect("/recepcionista/list_recepcionist")
+    return redirect("/")
+
+
+def desative_doctor(request, pk):
+    if request.method == "GET":
+        user = User.objects.get(id=pk)
+        if "check" in request.GET:
+            user.is_active = True
+        else:
+            user.is_active = False
+        user.save()
+        return redirect("/medico/list_doctor")
+    return redirect("/")

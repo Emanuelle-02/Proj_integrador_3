@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-md-2">
-                <a href="{% url 'recepcionist_create' %}" class="btn btn-primary">+ Recepcionista</a>
+                <a href="{% url 'recepcionist_create' %}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-user-plus"></i> Recepcionista</a>
             </div>
         </div>
     </div>
@@ -34,17 +34,19 @@
             </thead>
             <tbody>
                 {% for recepcionist in obj_pagina %}
-                <tr>
-                    <td>{{recepcionist.user.first_name}}</td>
-                    <td>{{recepcionist.user.email}}</td>
-                    <td>{{recepcionist.user.phone}}</td>
-                    <td>{{recepcionist.user.city}}</td>
-                    <td>
-                        
-                        <a href="{% url 'recepcionist_create' recepcionist.user.id %}" class="btn btn-secondary btn-sm">Editar</a>
-                        <a href="{% url 'recepcionist_delete' recepcionist.user.id %}" class="btn btn-secondary btn-sm">Remover</a>
-                    </td>  
-                </tr>
+                    {% if recepcionist.user.is_active == True %}
+                    <tr>
+                        <td>{{recepcionist.user.first_name}}</td>
+                        <td>{{recepcionist.user.email}}</td>
+                        <td>{{recepcionist.user.phone}}</td>
+                        <td>{{recepcionist.user.city}}</td>
+                        <td>
+                            
+                            <a href="{% url 'recepcionist_create' recepcionist.user.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-user-pen"></i></a>
+                            <a href="{% url 'remove_recepcionist' recepcionist.user.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-user-minus"></i></a>
+                        </td>  
+                    </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

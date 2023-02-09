@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from apps.administrador.models import Category, Expenses
 
+from .factories import CategoryFactory, ExpenseFactory
 from .test_admin_base import AdminTestBase
 
 
@@ -28,3 +29,8 @@ class AdminModelsTest(AdminTestBase):
         e = self.create_expense()
         self.assertTrue(isinstance(e, Expenses))
         self.assertEqual(e.__str__(), e.description)
+
+    def test_expense_str_rep(self):
+        expense = ExpenseFactory()
+        expect = f"{expense.description}"
+        self.assertEqual(str(expense), expect)

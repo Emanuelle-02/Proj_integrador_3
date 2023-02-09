@@ -56,6 +56,7 @@ class Appointment(models.Model):
     def __str__(self):
         return self.patient
 
+
 class Exam(models.Model):
     patient = models.CharField(max_length=255)
     age = models.CharField(max_length=3)

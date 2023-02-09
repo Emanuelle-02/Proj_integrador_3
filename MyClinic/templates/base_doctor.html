@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>MyClinic - Início {% block title %}{% endblock %}</title>
+        <title>MyClinic - Médico {% block title %}{% endblock %}</title>
         <link href="{% static 'css/styles.css '%}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -36,10 +36,6 @@
                             </a>
                             
                             <div class="sb-sidenav-menu-heading" style="color: white;">Interface</div>
-                            <!--a class="nav-link" href="{% url 'list_appointment' %}" style="color: white;">
-                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-user-doctor"></i></div>
-                                    Minhas consultas
-                            </a-->
                             
                             <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-user-doctor"></i></div>
@@ -52,17 +48,28 @@
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-list"></i></div>
                                         Pendentes
                                     </a>
-                                    <!-- a class="nav-link" href="#" style="color: white;">
-                                        <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-chart-pie"></i></div>
-                                        Despesas por mês
-                                    </a>
-                                    <a class="nav-link" href="#" style="color: white;">
-                                        <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-chart-pie"></i></div>
-                                        Despesas por ano
-                                    </a -->
                                     <a class="nav-link" href="{% url 'list_complete_appointment' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-check"></i></div>
                                         Concluídas
+                                    </a>
+                                </nav>
+                            </div>
+                        
+                            <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-stethoscope"></i></div>
+                                    Meus Exames
+                                <div class="sb-sidenav-collapse-arrow" style="color: white;"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="{% url 'list_exam' %}" style="color: white;">
+                                        <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-list"></i></div>
+                                        Pendentes
+                                    </a>
+                                    <a class="nav-link" href="{% url 'list_complete_exam' %}" style="color: white;">
+                                        <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-check"></i></div>
+                                        Concluídos
                                     </a>
                                 </nav>
                             </div>

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>MyClinic - Início {% block title %}{% endblock %}</title>
+        <title>MyClinic - Recepcionista {% block title %}{% endblock %}</title>
         <link href="{% static 'css/styles.css '%}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -40,10 +40,25 @@
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-folder-plus"></i></div>
                                     Manter Consultas
                             </a>
+                            <a class="nav-link" href="{% url 'exams_list' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-stethoscope"></i></div>
+                                    Manter Exames
+                            </a>
+
                             <div class="sb-sidenav-menu-heading" style="color: white;">Financeiro</div>
                             <a class="nav-link" href="{% url 'list_receita' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-wallet"></i></div>
                                     Minha Receita
+                            </a>
+
+                            <div class="sb-sidenav-menu-heading" style="color: white;">Atendimentos arquivados</div>
+                            <a class="nav-link" href="{% url 'done_appointment_list' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-box-archive"></i></div>
+                                    Consultas
+                            </a>
+                            <a class="nav-link" href="{% url 'exams_done_list' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-box-archive"></i></div>
+                                    Exames
                             </a>
                             
                         </div>
