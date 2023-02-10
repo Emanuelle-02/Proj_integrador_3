@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
+from apps.doutor.models import Leave
 from apps.recepcionista.models import Appointment
 
 
@@ -24,5 +25,21 @@ class AppointmentPrescriptionForm(ModelForm):
         widgets = {
             "gender": forms.Select(attrs={"class": "form-control"}),
             "description": forms.Select(attrs={"class": "form-control"}),
+            "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+        }
+
+
+class MedicalLeaveForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MedicalLeaveForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        model = Leave
+        fields = [
+            "patient","days","date",
+        ]
+        widgets = {
             "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
         }

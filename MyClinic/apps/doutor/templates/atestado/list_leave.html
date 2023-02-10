@@ -7,10 +7,13 @@
             <div class="col-md-10">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Minhas consultas</li>
+                        <li class="breadcrumb-item">Atestados emitidos</li>
                         <li class="breadcrumb-item active" aria-current="page">Lançamentos</li>
                     </ol>
                 </nav>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'leave_form' %}" class="btn btn-dark btn-sm">Emitir atestado</a>
             </div>
         </div>
     </div>
@@ -21,31 +24,20 @@
                 <thead>
                     <tr>
                         <th>Paciente</th>
-                        <th>Genero</th>
-                        <th>Idade</th>
-                        <th>Tipo</th>
-                        <th>Médico</th>
                         <th>Data</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for appointment in obj_pagina %}
+                    {% for leave in obj_pagina %}
                     <tr>
-                        <td>{{appointment.patient}}</td>
-                        <td>{{appointment.gender}}</td>
-                        <td>{{appointment.age}}</td>
-                        <td>{{appointment.description}}</td>
-                        <td>{{appointment.doctor}}</td>
-                        <td>{{appointment.date}}</td>
+                        <td>{{leave.patient}}</td>
+                        <td>{{leave.date}}</td>
                         
-                        {% if appointment.status == False %}
                         <td>
-                            <a href="{% url 'appoint_form' appointment.id %}" class="btn btn-primary btn-sm" alt="Lançar consulta"><i class="fa-solid fa-notes-medical"></i> Notas</a>
-                            <a href="{% url 'appointment_detail' appointment.id %}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{% url 'conclude_appointment' appointment.id %}" class="btn btn-success btn"><i class="fa-solid fa-check"></i></a>
+                            <a href="{% url 'leave_detail' leave.id %}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="#" class="btn btn-success btn"><i class="fa-solid fa-file-arrow-down"></i></a>
                         </td>
-                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -78,8 +70,6 @@
     </div>
 </div>
 
-
-    
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 {% endblock %}

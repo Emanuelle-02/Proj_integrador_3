@@ -40,7 +40,8 @@
                         <td>{{appointment.date}}</td>
                         
                         <td>
-                            <a href="" class="btn btn-primary btn-sm">Detalhes</a>
+                            <a href="{% url 'appointment_detail' appointment.id %}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{% url 'prescription_detail' appointment.id %}" class="btn btn-primary"><i class="fa-solid fa-prescription-bottle-medical"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
