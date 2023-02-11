@@ -158,3 +158,10 @@ class MedicalLeaveDatailView(LoginRequiredMixin, DetailView):
     model = Leave
     template_name = 'detalhes/leave_detail.html'
     context_object_name = 'leave'
+
+
+class ExamSolicitationDatailView(LoginRequiredMixin, DetailView):
+    login_url = "/medico_login"
+    model = Appointment
+    template_name = 'detalhes/exam_detail.html'
+    context_object_name = 'appointment'

@@ -47,4 +47,6 @@ urlpatterns = [
     ),
     path("create_medical_leave", CreateMedicalLeave.as_view(), name="leave_form"),
     path("leave_detail/<int:pk>",MedicalLeaveDatailView.as_view(), name="leave_detail"),
+    path("exam_detail/<int:pk>",ExamSolicitationDatailView.as_view(), name="exam_detail"),
 ]
+

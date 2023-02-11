@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.timezone import now
 
 from apps.accounts.models import Doctor, User
@@ -56,6 +57,8 @@ class Appointment(models.Model):
     def __str__(self):
         return self.patient
 
+    #def get_absolute_url(self):
+    #    return reverse('detalhes:appointment_datail',)
 
 class Exam(models.Model):
     patient = models.CharField(max_length=255)

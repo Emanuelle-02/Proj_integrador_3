@@ -55,13 +55,13 @@
                                 </nav>
                             </div>
                         
-                            <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages2" aria-expanded="false" aria-controls="collapsePages2">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-stethoscope"></i></div>
                                     Meus Exames
                                 <div class="sb-sidenav-collapse-arrow" style="color: white;"><i class="fas fa-angle-down"></i></div>
                             </a>
                             
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
+                            <div class="collapse" id="collapsePages2" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link" href="{% url 'list_exam' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-list"></i></div>
@@ -73,6 +73,11 @@
                                     </a>
                                 </nav>
                             </div>
+
+                            <a class="nav-link" href="{% url 'list_medical_leave' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-file-medical"></i></div>
+                                Emitir atestado
+                            </a>
                         </div>
                         
                         <form class="d-flex" action="{% url 'logout' %}" method="POST">
