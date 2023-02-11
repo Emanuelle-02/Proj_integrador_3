@@ -24,7 +24,6 @@ class DoutorTestBase(TestCase):
         doctor = Doctor.objects.create(user=doctor)
         return doctor
 
-
     def login(self):
         user_logged = self.client.login(username="doctor1", password="clinica123")
         return user_logged

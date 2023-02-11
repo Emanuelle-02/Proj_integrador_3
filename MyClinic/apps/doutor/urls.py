@@ -40,13 +40,26 @@ urlpatterns = [
         ListDocExamCompleteView.as_view(),
         name="list_complete_exam",
     ),
-    path("appointment_detail/<int:pk>",AppointmentDocDatailView.as_view(), name="appointment_detail"),
-    path("prescription_detail/<int:pk>",PrecriptionDocDatailView.as_view(), name="prescription_detail"),
     path(
-        "list_medical_leave", ListMedicalLeaveView.as_view(), name="list_medical_leave",
+        "appointment_detail/<int:pk>",
+        AppointmentDocDatailView.as_view(),
+        name="appointment_detail",
+    ),
+    path(
+        "prescription_detail/<int:pk>",
+        PrecriptionDocDatailView.as_view(),
+        name="prescription_detail",
+    ),
+    path(
+        "list_medical_leave",
+        ListMedicalLeaveView.as_view(),
+        name="list_medical_leave",
     ),
     path("create_medical_leave", CreateMedicalLeave.as_view(), name="leave_form"),
-    path("leave_detail/<int:pk>",MedicalLeaveDatailView.as_view(), name="leave_detail"),
-    path("exam_detail/<int:pk>",ExamSolicitationDatailView.as_view(), name="exam_detail"),
+    path(
+        "leave_detail/<int:pk>", MedicalLeaveDatailView.as_view(), name="leave_detail"
+    ),
+    path(
+        "exam_detail/<int:pk>", ExamSolicitationDatailView.as_view(), name="exam_detail"
+    ),
 ]
-

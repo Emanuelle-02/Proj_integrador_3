@@ -38,7 +38,9 @@ class MedicalLeaveForm(ModelForm):
     class Meta:
         model = Leave
         fields = [
-            "patient","days","date",
+            "patient",
+            "days",
+            "date",
         ]
         widgets = {
             "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),

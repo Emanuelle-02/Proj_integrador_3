@@ -71,9 +71,10 @@ class AppointmentDataView(LoginRequiredMixin, UpdateView):
 class AppointmentDocDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Appointment
-    template_name = 'detalhes/appointment_detail.html'
-    context_object_name = 'appointment'
-    
+    template_name = "detalhes/appointment_detail.html"
+    context_object_name = "appointment"
+
+
 def conclude_appointment_view(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.status = True
@@ -121,8 +122,8 @@ class ListDocExamCompleteView(LoginRequiredMixin, View):
 class PrecriptionDocDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Appointment
-    template_name = 'detalhes/prescription_detail.html'
-    context_object_name = 'appointment'
+    template_name = "detalhes/prescription_detail.html"
+    context_object_name = "appointment"
 
 
 class CreateMedicalLeave(LoginRequiredMixin, CreateView):
@@ -151,17 +152,17 @@ class ListMedicalLeaveView(LoginRequiredMixin, View):
             "obj_pagina": obj_pagina,
         }
         return render(request, "atestado/list_leave.html", context)
-    
+
 
 class MedicalLeaveDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Leave
-    template_name = 'detalhes/leave_detail.html'
-    context_object_name = 'leave'
+    template_name = "detalhes/leave_detail.html"
+    context_object_name = "leave"
 
 
 class ExamSolicitationDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Appointment
-    template_name = 'detalhes/exam_detail.html'
-    context_object_name = 'appointment'
+    template_name = "detalhes/exam_detail.html"
+    context_object_name = "appointment"
