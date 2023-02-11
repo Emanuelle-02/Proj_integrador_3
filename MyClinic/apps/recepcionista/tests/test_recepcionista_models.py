@@ -19,3 +19,17 @@ class RecepcionistaModelsTest(RecepcionistTestBase):
         income = self.create_income()
         self.assertTrue(isinstance(income, Income))
         self.assertEqual(income.__str__(), income.description)
+
+    def create_appointment(self, patient="Paciente2", age=250):
+        return Appointment.objects.create(
+            patient=patient,
+            age=age,
+            doctor=self.create_test_doctor(),
+            date=timezone.now(),
+            user=self.create_test_recepcionist(),
+        )
+
+    def test_appointment_creation(self):
+        appoint = self.create_appointment()
+        self.assertTrue(isinstance(appoint, Appointment))
+        self.assertEqual(appoint.__str__(), appoint.patient)

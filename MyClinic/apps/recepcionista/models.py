@@ -57,8 +57,9 @@ class Appointment(models.Model):
     def __str__(self):
         return self.patient
 
-    #def get_absolute_url(self):
+    # def get_absolute_url(self):
     #    return reverse('detalhes:appointment_datail',)
+
 
 class Exam(models.Model):
     patient = models.CharField(max_length=255)

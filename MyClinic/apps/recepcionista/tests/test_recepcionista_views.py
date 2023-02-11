@@ -31,3 +31,24 @@ class RecepcionistViewsTest(RecepcionistTestBase):
         response = self.client.get(reverse("exams_list"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "exames/list_exams.html")
+
+    def test_list_income_view(self):
+        self.create_test_recepcionist()
+        self.login()
+        response = self.client.get(reverse("list_receita"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "receita/list_receita.html")
+
+    def test_list_done_appointment_view(self):
+        self.create_test_recepcionist()
+        self.login()
+        response = self.client.get(reverse("done_appointment_list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "consultas/done_appointment_list.html")
+
+    def test_list_done_exam_view(self):
+        self.create_test_recepcionist()
+        self.login()
+        response = self.client.get(reverse("exams_done_list"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "exames/list_done_exams.html")
