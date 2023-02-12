@@ -1,4 +1,5 @@
 {% load static %}
+
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -30,32 +31,54 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading" style="color: white;">Core</div>
-                            <a class="nav-link" href="{% url 'doc_index' %}" style="color: white;">
+                            <a class="nav-link" id="doc_index" href="{% url 'doc_index' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fas fa-home"></i></div>
                                 Home
                             </a>
+
+                            <a class="nav-link" id="list_medical_leave" href="{% url 'list_medical_leave' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-file-medical"></i></div>
+                                Emitir atestado
+                            </a>
                             
-                            <div class="sb-sidenav-menu-heading" style="color: white;">Interface</div>
-                            
-                            <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-sidenav-menu-heading" style="color: white;">Minhas consultas</div>
+                            <a class="nav-link" id="list_appointment" href="{% url 'list_appointment' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-user-doctor"></i></div>
+                                Pendentes
+                            </a>
+                            <a class="nav-link" id="list_complete_appointment" href="{% url 'list_complete_appointment' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-check"></i></div>
+                                Concluídas
+                            </a>
+
+                            <!--a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-user-doctor"></i></div>
                                     Minhas Consultas
                                 <div class="sb-sidenav-collapse-arrow" style="color: white;"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="{% url 'list_appointment' %}" style="color: white;">
+                                    <a class="nav-link" id="list_appointment" href="{% url 'list_appointment' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-list"></i></div>
                                         Pendentes
                                     </a>
-                                    <a class="nav-link" href="{% url 'list_complete_appointment' %}" style="color: white;">
+                                    <a class="nav-link" id="list_complete_appointment" href="{% url 'list_complete_appointment' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-check"></i></div>
                                         Concluídas
                                     </a>
                                 </nav>
-                            </div>
-                        
-                            <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages2" aria-expanded="false" aria-controls="collapsePages2">
+                            </div -->
+                            <div class="sb-sidenav-menu-heading" style="color: white;">Meus Exames</div>
+                            <a class="nav-link" id="list_exam" href="{% url 'list_exam' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-stethoscope"></i></div>
+                                Pendentes
+                            </a>
+                            <a class="nav-link" id="list_complete_exam" href="{% url 'list_complete_exam' %}" style="color: white;">
+                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-check"></i></div>
+                                Concluídos
+                            </a>
+
+                            <!-- a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages2" aria-expanded="false" aria-controls="collapsePages2">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-stethoscope"></i></div>
                                     Meus Exames
                                 <div class="sb-sidenav-collapse-arrow" style="color: white;"><i class="fas fa-angle-down"></i></div>
@@ -63,24 +86,19 @@
                             
                             <div class="collapse" id="collapsePages2" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="{% url 'list_exam' %}" style="color: white;">
+                                    <a class="nav-link" id="list_exam" href="{% url 'list_exam' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-list"></i></div>
                                         Pendentes
                                     </a>
-                                    <a class="nav-link" href="{% url 'list_complete_exam' %}" style="color: white;">
+                                    <a class="nav-link" id="list_complete_exam" href="{% url 'list_complete_exam' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-check"></i></div>
                                         Concluídos
                                     </a>
                                 </nav>
-                            </div>
-
-                            <a class="nav-link" href="{% url 'list_medical_leave' %}" style="color: white;">
-                                <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-file-medical"></i></div>
-                                Emitir atestado
-                            </a>
+                            </div -->
                         </div>
                         
-                        <form class="d-flex" action="{% url 'logout' %}" method="POST">
+                        <form class="d-flex mt-3" action="{% url 'logout' %}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-outline-dark btn-sm px-3" style="color: white; font-size: medium;" type="submit"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
                         </form>

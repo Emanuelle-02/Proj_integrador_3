@@ -30,40 +30,39 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading" style="color: white;">Core</div>
-                            <a class="nav-link" href="{% url 'recepcionist_index' %}" style="color: white;">
+                            <a class="nav-link" id="recepcionist_index" href="{% url 'recepcionist_index' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fas fa-home"></i></div>
                                 Home
                             </a>
                             
                             <div class="sb-sidenav-menu-heading" style="color: white;">Interface</div>
-                            <a class="nav-link" href="{% url 'appointment_list' %}" style="color: white;">
+                            <a class="nav-link" id="appointment_list" href="{% url 'appointment_list' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-folder-plus"></i></div>
                                     Manter Consultas
                             </a>
-                            <a class="nav-link" href="{% url 'exams_list' %}" style="color: white;">
+                            <a class="nav-link" id="exams_list" href="{% url 'exams_list' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-stethoscope"></i></div>
                                     Manter Exames
                             </a>
 
-                            <div class="sb-sidenav-menu-heading" style="color: white;">Financeiro</div>
-                            <a class="nav-link" href="{% url 'list_receita' %}" style="color: white;">
+                            <div class="sb-sidenav-menu-heading" style="color: white;">Fluxo de Caixa</div>
+                            <a class="nav-link" id="list_receita" href="{% url 'list_receita' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-wallet"></i></div>
-                                    Minha Receita
+                                    Entrada
                             </a>
 
                             <div class="sb-sidenav-menu-heading" style="color: white;">Atendimentos arquivados</div>
-                            <a class="nav-link" href="{% url 'done_appointment_list' %}" style="color: white;">
+                            <a class="nav-link" id="done_appointment_list" href="{% url 'done_appointment_list' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-box-archive"></i></div>
                                     Consultas
                             </a>
-                            <a class="nav-link" href="{% url 'exams_done_list' %}" style="color: white;">
+                            <a class="nav-link" id="exams_done_list" href="{% url 'exams_done_list' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-box-archive"></i></div>
                                     Exames
-                            </a>
-                            
+                            </a>  
                         </div>
                         
-                        <form class="d-flex" action="{% url 'logout' %}" method="POST">
+                        <form class="d-flex mt-3" action="{% url 'logout' %}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-outline-dark btn-sm px-3" style="color: white; font-size: medium;" type="submit"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
                         </form>

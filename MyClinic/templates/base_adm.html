@@ -30,46 +30,54 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading" style="color: white;">Core</div>
-                            <a class="nav-link" href="{% url 'index' %}" style="color: white;">
+                            <a class="nav-link" id="index" href="{% url 'index' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fas fa-home"></i></div>
                                 Home
                             </a>
                             
                             <div class="sb-sidenav-menu-heading" style="color: white;">Interface</div>
-                            <a class="nav-link" href="{% url 'list_doctor' %}" style="color: white;">
+                            <a class="nav-link" id="list_doctor" href="{% url 'list_doctor' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-user-doctor"></i></div>
                                     Manter médicos
                             </a>
-                            <a class="nav-link" href="{% url 'list_recepcionist' %}" style="color: white;">
+                            <a class="nav-link" id="list_recepcionist" href="{% url 'list_recepcionist' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-clipboard-user"></i></div>
                                     Manter recepcionistas
                             </a>
                             <div class="sb-sidenav-menu-heading" style="color: white;">Fluxo de Caixa</div>
-                            <a class="nav-link" href="{% url 'list_caixa' %}" style="color: white;">
+                            <a class="nav-link" id="list_caixa" href="{% url 'list_caixa' %}" style="color: white;">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-wallet"></i></div>
                                     Entrada
                             </a>
-                            <a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <a class="nav-link" id="list_despesas" href="{% url 'list_despesas' %}" style="color: white;">
+                              <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-receipt"></i></div>
+                              Saídas
+                            </a>
+                            <a class="nav-link" id="list_categoria" href="{% url 'list_categoria' %}" style="color: white;">
+                              <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-list-check"></i></div>
+                              Categorias de sáida
+                          </a>
+                            <!-- a class="nav-link collapsed" style="color: white;" href="" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-receipt" style="color: white;"></i></div>
                                     Saída
                                 <div class="sb-sidenav-collapse-arrow" style="color: white;"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion" style="color: white;">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="{% url 'list_despesas' %}" style="color: white;">
+                                    <a class="nav-link" id="list_despesas" href="{% url 'list_despesas' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-file-invoice"></i></div>
                                         Gerenciar saídas
                                     </a>
                             
-                                    <a class="nav-link" href="{% url 'list_categoria' %}" style="color: white;">
+                                    <a class="nav-link" id="list_categoria" href="{% url 'list_categoria' %}" style="color: white;">
                                         <div class="sb-nav-link-icon" style="color: white;"><i class="fa-solid fa-list-check"></i></div>
                                         Gerenciar categorias
                                     </a>
                                 </nav>
-                            </div>
+                            </div -->
                         </div>
                         
-                        <form class="d-flex" action="{% url 'logout' %}" method="POST">
+                        <form class="d-flex mt-3" action="{% url 'logout' %}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-outline-dark btn-sm px-3" style="color: white; font-size: medium;" type="submit"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
                         </form>
