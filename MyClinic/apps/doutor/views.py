@@ -1,15 +1,17 @@
 import genericpath
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import View
+from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from apps.doutor.forms import AppointmentPrescriptionForm, MedicalLeaveForm
 from apps.doutor.models import Leave
+from apps.doutor.utils import render_to_pdf
 from apps.recepcionista.models import Appointment, Exam
 
 
@@ -71,7 +73,7 @@ class AppointmentDataView(LoginRequiredMixin, UpdateView):
 class AppointmentDocDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Appointment
-    template_name = "detalhes/appointment_detail.html"
+    template_name = "consulta/appointment_detail.html"
     context_object_name = "appointment"
 
 
@@ -122,8 +124,17 @@ class ListDocExamCompleteView(LoginRequiredMixin, View):
 class PrecriptionDocDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Appointment
-    template_name = "detalhes/prescription_detail.html"
+    template_name = "emite_pdf/prescription_detail.html"
     context_object_name = "appointment"
+
+    def get_context_data(self, **kwargs):
+        context = super(PrecriptionDocDatailView, self).get_context_data(**kwargs)
+        # add extra context if needed
+        return context
+
+    def render_to_response(self, context, **kwargs):
+        pdf = render_to_pdf(self.template_name, context)
+        return HttpResponse(pdf, content_type="application/pdf")
 
 
 class CreateMedicalLeave(LoginRequiredMixin, CreateView):
@@ -157,12 +168,30 @@ class ListMedicalLeaveView(LoginRequiredMixin, View):
 class MedicalLeaveDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Leave
-    template_name = "detalhes/leave_detail.html"
+    template_name = "emite_pdf/leave_detail.html"
     context_object_name = "leave"
+
+    def get_context_data(self, **kwargs):
+        context = super(MedicalLeaveDatailView, self).get_context_data(**kwargs)
+        # add extra context if needed
+        return context
+
+    def render_to_response(self, context, **kwargs):
+        pdf = render_to_pdf(self.template_name, context)
+        return HttpResponse(pdf, content_type="application/pdf")
 
 
 class ExamSolicitationDatailView(LoginRequiredMixin, DetailView):
     login_url = "/medico_login"
     model = Appointment
-    template_name = "detalhes/exam_detail.html"
+    template_name = "emite_pdf/exam_detail.html"
     context_object_name = "appointment"
+
+    def get_context_data(self, **kwargs):
+        context = super(ExamSolicitationDatailView, self).get_context_data(**kwargs)
+        # add extra context if needed
+        return context
+
+    def render_to_response(self, context, **kwargs):
+        pdf = render_to_pdf(self.template_name, context)
+        return HttpResponse(pdf, content_type="application/pdf")
