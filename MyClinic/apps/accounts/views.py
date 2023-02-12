@@ -11,7 +11,7 @@ from .models import User
 # Create your views here.
 class Home(View):
     def get(self, request):
-        return render(request, "home.html")
+        return render(request, "op_login.html")
 
 
 class Login_Type(View):

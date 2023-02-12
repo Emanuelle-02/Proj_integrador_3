@@ -9,7 +9,7 @@ from .test_accounts_base import AccountTestBase
 class AccountsViewsTest(AccountTestBase):
     def test_home_View(self):
         response = self.client.get(reverse("home"))
-        self.assertTemplateUsed(response, "home.html")
+        self.assertTemplateUsed(response, "op_login.html")
 
     def test_login_type_view(self):
         response = self.client.get(reverse("op_login"))

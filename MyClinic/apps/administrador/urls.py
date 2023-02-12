@@ -78,4 +78,5 @@ urlpatterns = [
         DeleteCategoryView.as_view(),
         name="delete_categoria",
     ),
+    path("export_excel", export_excel, name="export_excel"),
 ]

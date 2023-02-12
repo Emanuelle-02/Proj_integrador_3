@@ -1,9 +1,12 @@
+import datetime
+
+import xlwt
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
@@ -11,6 +14,7 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from apps.accounts.forms import DoctorForm, RecepcionistForm
 from apps.accounts.models import Doctor, Recepcionist, User
+from apps.administrador.filter import DoctorFilter
 from apps.recepcionista.forms import IncomeForm
 from apps.recepcionista.models import Income
 
@@ -33,9 +37,9 @@ class Index(View):
         total_despesa = 0
         saldo = 0
 
-        for despesa in despesas:
+        for despesa in despesas:  # pragma: no cover
             total_despesa += despesa.value
-        for receita in receitas:
+        for receita in receitas:  # pragma: no cover
             total_receita += receita.value
 
         saldo = total_receita - total_despesa
@@ -52,6 +56,7 @@ class Index(View):
 
 class ListDoctorView(LoginRequiredMixin, ListView):
     login_url = "/admin_login"
+    filterset = DoctorFilter
 
     def get(self, request):
         medico = Doctor.objects.all()
@@ -64,6 +69,18 @@ class ListDoctorView(LoginRequiredMixin, ListView):
         }
 
         return render(request, "medico/list_doctor.html", context)
+
+    def get_queryset(self):
+        queryset = super().get_queryset().all().order_by("first_name")
+        self.filterset = self.filterset(self.request.GET, queryset=queryset)
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form_filter"] = self.filterset.form
+        return
+
+    #
 
 
 class DoctorCreateView(LoginRequiredMixin, CreateView):
@@ -279,3 +296,35 @@ def desative_doctor(request, pk):
         user.save()
         return redirect("/medico/list_doctor")
     return redirect("/")
+
+
+def export_excel(request):
+    response = HttpResponse(content_type="application/ms-excel")
+    response["Content-Disposition"] = (
+        "attachment; filename=Expenses_Report" + str(datetime.datetime.now()) + ".xls"
+    )
+    wb = xlwt.Workbook(encoding="UTF-8")
+    ws = wb.add_sheet("Relatório de Despesas")
+    row_num = 0
+    sum = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    cols = ["Descrição", "Categoria", "Valor da despesa", "Data"]
+
+    for col_num in range(len(cols)):
+        ws.write(row_num, col_num, cols[col_num], font_style)
+    font_style = xlwt.XFStyle()
+
+    rows = Expenses.objects.all().values_list(
+        "description", "category", "value", "date"
+    )
+    for row in rows:
+        row_num += 1
+
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, str(row[col_num]), font_style)
+
+    wb.save(response)
+
+    return response
