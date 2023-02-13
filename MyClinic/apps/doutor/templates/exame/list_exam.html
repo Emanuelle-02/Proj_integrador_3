@@ -24,7 +24,6 @@
                         <th>Genero</th>
                         <th>Idade</th>
                         <th>Tipo</th>
-                        <th>Médico</th>
                         <th>Data</th>
                         <th>Ações</th>
                     </tr>
@@ -36,12 +35,11 @@
                         <td>{{exam.gender}}</td>
                         <td>{{exam.age}}</td>
                         <td>{{exam.type}}</td>
-                        <td>{{exam.doctor}}</td>
                         <td>{{exam.date}}</td>
                         
                         {% if exam.status == False %}
                         <td>
-                            <a href="{% url 'conclude_exam' exam.id %}" class="btn btn-dark btn"><i class="fa-solid fa-check"></i></a>
+                            <a href="{% url 'conclude_exam' exam.id %}" id="conclude_exam" class="btn btn-dark btn"><i class="fa-solid fa-check"></i></a>
                         </td>
                         {% endif %}
                     </tr>

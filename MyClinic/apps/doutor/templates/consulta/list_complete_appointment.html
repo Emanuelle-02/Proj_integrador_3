@@ -24,7 +24,6 @@
                         <th>Genero</th>
                         <th>Idade</th>
                         <th>Tipo</th>
-                        <th>Médico</th>
                         <th>Data</th>
                         <th>Ações</th>
                     </tr>
@@ -36,12 +35,11 @@
                         <td>{{appointment.gender}}</td>
                         <td>{{appointment.age}}</td>
                         <td>{{appointment.description}}</td>
-                        <td>{{appointment.doctor}}</td>
                         <td>{{appointment.date}}</td>
                         
                         <td>
-                            <a href="{% url 'prescription_detail' appointment.id %}" class="btn btn-primary"><i class="fa-solid fa-prescription-bottle-medical"></i></a>
-                            <a href="{% url 'exam_detail' appointment.id %}" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i></a>
+                            <a href="{% url 'prescription_detail' appointment.id %}" id="prescription_detail" class="btn btn-primary"><i class="fa-solid fa-prescription-bottle-medical"></i></a>
+                            <a href="{% url 'exam_detail' appointment.id %}" id="exam_detail" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i></a>
                             <a href="{% url 'appointment_detail' appointment.id %}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
                         </td>
                     </tr>

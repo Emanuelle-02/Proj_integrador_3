@@ -24,7 +24,6 @@
                         <th>Genero</th>
                         <th>Idade</th>
                         <th>Tipo</th>
-                        <th>Médico</th>
                         <th>Data</th>
                         <th>Ações</th>
                     </tr>
@@ -36,14 +35,13 @@
                         <td>{{appointment.gender}}</td>
                         <td>{{appointment.age}}</td>
                         <td>{{appointment.description}}</td>
-                        <td>{{appointment.doctor}}</td>
                         <td>{{appointment.date}}</td>
                         
                         {% if appointment.status == False %}
                         <td>
-                            <a href="{% url 'appoint_form' appointment.id %}" class="btn btn-primary btn-sm" alt="Lançar consulta"><i class="fa-solid fa-notes-medical"></i> Notas</a>
-                            <a href="{% url 'appointment_detail' appointment.id %}" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{% url 'conclude_appointment' appointment.id %}" class="btn btn-success btn"><i class="fa-solid fa-check"></i></a>
+                            <a href="{% url 'appoint_form' appointment.id %}" id="appoint_form" class="btn btn-primary btn-sm" alt="Lançar consulta"><i class="fa-solid fa-notes-medical"></i> Notas</a>
+                            <a href="{% url 'appointment_detail' appointment.id %}" id="appointment_detail" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{% url 'conclude_appointment' appointment.id %}" id="conclude_appointment" class="btn btn-success btn"><i class="fa-solid fa-check"></i></a>
                         </td>
                         {% endif %}
                     </tr>

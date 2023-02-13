@@ -80,3 +80,35 @@ class DoctorViewsTest(DoutorTestBase):
             follow=True,
         )
         assert response.status_code == 200
+
+    def test_appointment_conclude(self):
+        appoint = self.create_appointment()
+        response = self.client.post(
+            reverse_lazy("conclude_appointment", kwargs={"pk": appoint.pk}),
+            follow=True,
+        )
+        assert response.status_code == 200
+
+    def test_exam_conclude(self):
+        appoint = self.create_exam()
+        response = self.client.post(
+            reverse_lazy("conclude_exam", kwargs={"pk": appoint.pk}),
+            follow=True,
+        )
+        assert response.status_code == 200
+
+    def test_prescription_emission(self):
+        appoint = self.create_appointment()
+        response = self.client.post(
+            reverse_lazy("prescription_detail", kwargs={"pk": appoint.pk}),
+            follow=True,
+        )
+        assert response.status_code == 200
+
+    def test_exam_emission(self):
+        appoint = self.create_appointment()
+        response = self.client.post(
+            reverse_lazy("exam_detail", kwargs={"pk": appoint.pk}),
+            follow=True,
+        )
+        assert response.status_code == 200

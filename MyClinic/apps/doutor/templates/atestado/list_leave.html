@@ -13,7 +13,7 @@
                 </nav>
             </div>
             <div class="col-md-2">
-                <a href="{% url 'leave_form' %}" class="btn btn-dark btn-sm">Emitir atestado</a>
+                <a href="{% url 'leave_form' %}" id="leave_form" class="btn btn-dark btn-sm">Emitir atestado</a>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                         <td>{{leave.date}}</td>
                         
                         <td>
-                            <a href="{% url 'leave_detail' leave.id %}" class="btn btn-success btn"><i class="fa-solid fa-file-arrow-down"></i></a>
+                            <a href="{% url 'leave_detail' leave.id %}" id="leave_detail" class="btn btn-success btn" id="leave-detail"><i class="fa-solid fa-file-arrow-down"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
