@@ -73,3 +73,74 @@ class AdminViewsTest(AdminTestBase):
             follow=True,
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_create_user_doctor(self):
+        self.create_test_user()
+        self.login()
+        response = self.client.post(
+            reverse("doctor_create"),
+            data={
+                "first_name": "Doctor",
+                "last_name": "Teste",
+                "username": "Docs",
+                "email": "docs@gmail",
+                "phone": "98747-1254",
+                "city": "Encanto",
+                "password1:": "clinica123",
+                "password2:": "clinica123",
+            },
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_create_user_recepcionist(self):
+        self.create_test_user()
+        self.login()
+        response = self.client.post(
+            reverse("recepcionist_create"),
+            data={
+                "first_name": "Recepcionista",
+                "last_name": "Teste",
+                "username": "Reception",
+                "email": "reception@gmail",
+                "phone": "95484-1284",
+                "city": "Pau dos Ferros",
+                "password1:": "clinica123",
+                "password2:": "clinica123",
+            },
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_category_update(self):
+        category = self.create_category()
+        category_update = {
+            "name":"Put novo"
+        }
+        response = self.client.post(reverse_lazy('categoria_form', kwargs={"pk":category.pk}),category_update,follow=True)
+        assert response.status_code == 200
+
+    def test_remove_category(self):
+        category = self.create_category()
+        response = self.client.delete(
+            reverse("delete_categoria", kwargs={"pk": category.pk}), follow=True
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_category_update(self):
+        expense = self.create_expense()
+        expense_update = {
+            "name":"Put Teste Qualquer",
+            "value": 150,
+            "date":datetime.date.today()
+        }
+        response = self.client.post(reverse_lazy('despesa_form', kwargs={"pk":expense.pk}),expense_update,follow=True)
+        assert response.status_code == 200
+
+    def test_remove_expense(self):
+        expense = self.create_expense()
+        response = self.client.delete(
+            reverse("delete_categoria", kwargs={"pk": expense.pk}), follow=True
+        )
+        self.assertEqual(response.status_code, 200)

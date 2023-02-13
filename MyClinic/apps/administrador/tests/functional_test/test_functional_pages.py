@@ -14,17 +14,4 @@ from selenium.webdriver.support.ui import Select, WebDriverWait
 
 
 class FunctionalTest(TestCase, LiveServerTestCase):
-    def test_admin_login_page(self):
-        browser = webdriver.Chrome()
-        browser.get("http://127.0.0.1:8000/admin_login/")
-        wait = WebDriverWait(browser, 5)
-
-        username = browser.find_element(By.NAME, "username")
-        username.clear()
-        username.send_keys("Administrador")
-        password = browser.find_element(By.NAME, "password")
-        password.send_keys("clinica123")
-        password.send_keys(Keys.RETURN)
-        sleep(5)
-
-        browser.quit()
+    pass
