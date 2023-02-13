@@ -63,3 +63,91 @@ class FunctionalTest(TestCase, LiveServerTestCase):
         sleep(5)
 
         browser.quit()
+
+    def test_list_and_create_appointment_page(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/recepcionista_login/")
+        wait = WebDriverWait(browser, 5)
+
+        username = browser.find_element(By.NAME, "username")
+        username.clear()
+        username.send_keys("Yuri")
+        password = browser.find_element(By.NAME, "password")
+        password.send_keys("clinica123")
+        password.send_keys(Keys.RETURN)
+        exam = wait.until(EC.presence_of_element_located((By.ID, "appointment_list")))
+        exam.click()
+        sleep(2)
+        criar = wait.until(EC.presence_of_element_located((By.ID, "appointment_form")))
+        criar.click()
+        patient = browser.find_element(By.NAME, "patient")
+        patient.send_keys("Jane A.")
+        sleep(1)
+        age = browser.find_element(By.NAME, "age")
+        age.send_keys("58")
+        sleep(1)
+        gender = browser.find_element(By.NAME, "gender")
+        select = Select(gender)
+        select.select_by_visible_text("Feminino")
+        sleep(2)
+        doctor = browser.find_element(By.NAME, "doctor")
+        select = Select(doctor)
+        select.select_by_visible_text("Holt R. - Cardiologista")
+        sleep(2)
+        BtnRequest = wait.until(EC.presence_of_element_located((By.ID, "submit")))
+        BtnRequest.click()
+        sleep(5)
+
+        browser.quit()
+
+    def test_list_done_appointment_page(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/recepcionista_login/")
+        wait = WebDriverWait(browser, 5)
+
+        username = browser.find_element(By.NAME, "username")
+        username.clear()
+        username.send_keys("Yuri")
+        password = browser.find_element(By.NAME, "password")
+        password.send_keys("clinica123")
+        password.send_keys(Keys.RETURN)
+        exam = wait.until(
+            EC.presence_of_element_located((By.ID, "done_appointment_list"))
+        )
+        exam.click()
+        sleep(5)
+
+        browser.quit()
+
+    def test_list_done_exam_page(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/recepcionista_login/")
+        wait = WebDriverWait(browser, 5)
+
+        username = browser.find_element(By.NAME, "username")
+        username.clear()
+        username.send_keys("Yuri")
+        password = browser.find_element(By.NAME, "password")
+        password.send_keys("clinica123")
+        password.send_keys(Keys.RETURN)
+        exam = wait.until(EC.presence_of_element_located((By.ID, "exams_done_list")))
+        exam.click()
+        sleep(5)
+
+        browser.quit()
+
+    def test_list_income_page(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/recepcionista_login/")
+        wait = WebDriverWait(browser, 5)
+
+        username = browser.find_element(By.NAME, "username")
+        username.clear()
+        username.send_keys("Yuri")
+        password = browser.find_element(By.NAME, "password")
+        password.send_keys("clinica123")
+        password.send_keys(Keys.RETURN)
+        income = wait.until(EC.presence_of_element_located((By.ID, "list_receita")))
+        income.click()
+        sleep(5)
+        browser.quit()

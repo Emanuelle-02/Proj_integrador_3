@@ -18,7 +18,7 @@ class AdminTestBase(TestCase):
         admin.set_password("clinica123")
         admin.save()
         return admin
-    
+
     def create_test_doctor(self):
         doctor = User.objects.create_user(
             first_name="doctor1",
@@ -34,20 +34,20 @@ class AdminTestBase(TestCase):
         doctor.save()
         doctor = Doctor.objects.create(user=doctor)
         return doctor
-    
+
     def create_category(self, name="Eletricidade"):
         return Category.objects.create(name=name)
 
     def create_expense(self):
         expense = Expenses.objects.create(
-            description= "Teste qualquer",
-            category= self.create_category(),
+            description="Teste qualquer",
+            category=self.create_category(),
             value=200,
-            date= datetime.date(2023, 2, 11),
-            user= self.create_test_user()
+            date=datetime.date(2023, 2, 11),
+            user=self.create_test_user(),
         )
         return expense
-    
+
     def login(self):
         user_logged = self.client.login(
             username="administrador1", password="clinica123"

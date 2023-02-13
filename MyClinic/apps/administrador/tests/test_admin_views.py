@@ -93,7 +93,6 @@ class AdminViewsTest(AdminTestBase):
         )
         self.assertEqual(response.status_code, 200)
 
-
     def test_create_user_recepcionist(self):
         self.create_test_user()
         self.login()
@@ -115,10 +114,12 @@ class AdminViewsTest(AdminTestBase):
 
     def test_category_update(self):
         category = self.create_category()
-        category_update = {
-            "name":"Put novo"
-        }
-        response = self.client.post(reverse_lazy('categoria_form', kwargs={"pk":category.pk}),category_update,follow=True)
+        category_update = {"name": "Put novo"}
+        response = self.client.post(
+            reverse_lazy("categoria_form", kwargs={"pk": category.pk}),
+            category_update,
+            follow=True,
+        )
         assert response.status_code == 200
 
     def test_remove_category(self):
@@ -131,11 +132,15 @@ class AdminViewsTest(AdminTestBase):
     def test_category_update(self):
         expense = self.create_expense()
         expense_update = {
-            "name":"Put Teste Qualquer",
+            "name": "Put Teste Qualquer",
             "value": 150,
-            "date":datetime.date.today()
+            "date": datetime.date.today(),
         }
-        response = self.client.post(reverse_lazy('despesa_form', kwargs={"pk":expense.pk}),expense_update,follow=True)
+        response = self.client.post(
+            reverse_lazy("despesa_form", kwargs={"pk": expense.pk}),
+            expense_update,
+            follow=True,
+        )
         assert response.status_code == 200
 
     def test_remove_expense(self):
