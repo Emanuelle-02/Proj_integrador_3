@@ -48,6 +48,21 @@ class AdminTestBase(TestCase):
         )
         return expense
 
+    def create_test_recepcionist(self):
+        recepcionist = User.objects.create_user(
+            first_name="recepcionist",
+            last_name="R.",
+            email="recepcion@gmail.com",
+            username="recepcionista1",
+            city="Encanto",
+            phone="91587-4569",
+        )
+        recepcionist.set_password("clinica123")
+        recepcionist.is_recepcionist = True
+        recepcionist.save()
+        # recepcionist = Recepcionist.objects.create(user=recepcionist)
+        return recepcionist
+
     def login(self):
         user_logged = self.client.login(
             username="administrador1", password="clinica123"

@@ -149,3 +149,19 @@ class AdminViewsTest(AdminTestBase):
             reverse("delete_categoria", kwargs={"pk": expense.pk}), follow=True
         )
         self.assertEqual(response.status_code, 200)
+
+    def test_doctor_desactive(self):
+        doc = self.create_test_doctor()
+        response = self.client.post(
+            reverse_lazy("remove_doctor", kwargs={"pk": doc.pk}),
+            follow=True,
+        )
+        assert response.status_code == 200
+
+    def test_recepcionist_desactive(self):
+        recep = self.create_test_recepcionist()
+        response = self.client.post(
+            reverse_lazy("remove_recepcionist", kwargs={"pk": recep.pk}),
+            follow=True,
+        )
+        assert response.status_code == 200

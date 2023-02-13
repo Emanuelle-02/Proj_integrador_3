@@ -1,9 +1,9 @@
 from django import forms
 from django_filters import CharFilter, ChoiceFilter, FilterSet
 
-from apps.accounts.models import User
+from apps.accounts.models import Doctor, User
 
-choices = (
+SPECIALIZATION_CHOICES = (
     ("Pediatra", "Pediatra"),
     ("Gastroenterologista", "Gastroenterologista"),
     ("Neurologista", "Neurologista"),
@@ -18,9 +18,9 @@ class DoctorFilter(FilterSet):
     first_name = CharFilter(
         lookup_expr="icontains", widget=forms.TextInput(attrs={"class": "form-control"})
     )
-
     specialization = ChoiceFilter(
-        choices=choices, widget=forms.Select(attrs={"class": "form-control"})
+        choices=SPECIALIZATION_CHOICES,
+        widget=forms.Select(attrs={"class": "form-control"}),
     )
 
     class Meta:
