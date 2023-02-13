@@ -15,6 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+from rest_framework import routers
+
+from apps.recepcionista.viewsets import AppointmentViewSet, ExamViewSet, IncomeViewSet
+
+router = routers.SimpleRouter()
+router.register("api/income", IncomeViewSet, basename="income")
+router.register("api/exam", ExamViewSet, basename="exam")
+router.register("api/appointment", AppointmentViewSet, basename="appointment")
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -22,4 +36,17 @@ urlpatterns = [
     path("", include("apps.administrador.urls")),
     path("", include("apps.recepcionista.urls")),
     path("", include("apps.doutor.urls")),
-]
+    # YOUR PATTERNS
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    # Optional UI:
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/schema/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
+] + router.urls

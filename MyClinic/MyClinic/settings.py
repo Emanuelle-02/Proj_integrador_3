@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "apps.recepcionista",
     "apps.doutor",
+    "rest_framework",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
 ]
 
 
@@ -75,6 +78,22 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "MyClinic API",
+    "DESCRIPTION": "API do projeto MyCLinic - Projeto Integrador 3",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS SWAGGER
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+}
 
 WSGI_APPLICATION = "MyClinic.wsgi.application"
 
