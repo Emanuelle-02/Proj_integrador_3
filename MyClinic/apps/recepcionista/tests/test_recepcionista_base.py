@@ -1,8 +1,12 @@
+#from datetime import timezone
+
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
 from django.test import TestCase
+from django.utils import timezone
 
 from apps.accounts.models import Doctor, Recepcionist, User
+from apps.recepcionista.models import Appointment, Exam, Income
 
 
 class RecepcionistTestBase(TestCase):
@@ -39,6 +43,32 @@ class RecepcionistTestBase(TestCase):
         doctor.save()
         doctor = Doctor.objects.create(user=doctor)
         return doctor
+    
+    def create_appointment(self, patient="Paciente2", age=250):
+        return Appointment.objects.create(
+            patient=patient,
+            age=age,
+            doctor=self.create_test_doctor(),
+            date=timezone.now(),
+            user=self.create_test_recepcionist(),
+        )
+    
+    def create_exam(self, patient="Paciente7", age=28):
+        return Exam.objects.create(
+            patient=patient,
+            age=age,
+            doctor=self.create_test_doctor(),
+            date=timezone.now(),
+            user=self.create_test_recepcionist(),
+        )
+    
+    def create_income(self, description="Exame", value=250):
+        return Income.objects.create(
+            description=description,
+            value=value,
+            date=timezone.now(),
+            user=self.create_test_recepcionist(),
+        )
 
     def login(self):
         user_logged = self.client.login(
