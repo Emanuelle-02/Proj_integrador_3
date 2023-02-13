@@ -52,3 +52,31 @@ class DoctorViewsTest(DoutorTestBase):
         response = self.client.get(reverse("list_medical_leave"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "atestado/list_leave.html")
+
+    def test_create_medical_view(self):
+        self.create_test_doctor()
+        self.login()
+        response = self.client.post(
+            reverse("leave_form"),
+            data={
+                "patient": "Paciente 0",
+                "days": 2,
+                "date": datetime.date(2023, 2, 12),
+            },
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_appointment_update(self):
+        appoint = self.create_appointment()
+        appoint_update = {
+            "patient": "Paciente002",
+            "age": "25",
+            "date": datetime.date.today(),
+        }
+        response = self.client.post(
+            reverse_lazy("appointment_form", kwargs={"pk": appoint.pk}),
+            appoint_update,
+            follow=True,
+        )
+        assert response.status_code == 200
