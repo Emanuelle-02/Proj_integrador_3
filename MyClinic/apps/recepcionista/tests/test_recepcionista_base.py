@@ -1,4 +1,4 @@
-#from datetime import timezone
+# from datetime import timezone
 
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
@@ -43,7 +43,7 @@ class RecepcionistTestBase(TestCase):
         doctor.save()
         doctor = Doctor.objects.create(user=doctor)
         return doctor
-    
+
     def create_appointment(self, patient="Paciente2", age=250):
         return Appointment.objects.create(
             patient=patient,
@@ -52,7 +52,7 @@ class RecepcionistTestBase(TestCase):
             date=timezone.now(),
             user=self.create_test_recepcionist(),
         )
-    
+
     def create_exam(self, patient="Paciente7", age=28):
         return Exam.objects.create(
             patient=patient,
@@ -61,7 +61,7 @@ class RecepcionistTestBase(TestCase):
             date=timezone.now(),
             user=self.create_test_recepcionist(),
         )
-    
+
     def create_income(self, description="Exame", value=250):
         return Income.objects.create(
             description=description,

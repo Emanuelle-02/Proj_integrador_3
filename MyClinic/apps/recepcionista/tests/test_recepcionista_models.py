@@ -12,7 +12,6 @@ class RecepcionistaModelsTest(RecepcionistTestBase):
         self.assertTrue(isinstance(income, Income))
         self.assertEqual(income.__str__(), income.description)
 
-
     def test_appointment_creation(self):
         appoint = self.create_appointment()
         self.assertTrue(isinstance(appoint, Appointment))

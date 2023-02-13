@@ -50,10 +50,10 @@ class IncomeCreateView(LoginRequiredMixin, CreateView):
     template_name = "receita/receita_form.html"
 
     def form_valid(self, form):
-        obj = form.save(commit=False)# pragma: no cover
-        obj.user = self.request.user # pragma: no cover
-        obj.save()# pragma: no cover
-        return HttpResponseRedirect("list_receita")# pragma: no cover
+        obj = form.save(commit=False)  # pragma: no cover
+        obj.user = self.request.user  # pragma: no cover
+        obj.save()  # pragma: no cover
+        return HttpResponseRedirect("list_receita")  # pragma: no cover
 
 
 class IncomeEditView(LoginRequiredMixin, UpdateView):
@@ -70,7 +70,7 @@ class IncomeDeleteView(LoginRequiredMixin, DeleteView):
     success_url = "/list_receita"
 
     def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)# pragma: no cover 
+        return self.delete(request, *args, **kwargs)  # pragma: no cover
 
 
 class ListAppointmentView(LoginRequiredMixin, View):
@@ -95,10 +95,10 @@ class AppointmentCreateView(LoginRequiredMixin, CreateView):
     template_name = "consultas/appointment_form.html"
 
     def form_valid(self, form):
-        obj = form.save(commit=False)# pragma: no cover
-        obj.user = self.request.user# pragma: no cover
-        obj.save()# pragma: no cover
-        return HttpResponseRedirect("list_appointments")# pragma: no cover
+        obj = form.save(commit=False)  # pragma: no cover
+        obj.user = self.request.user  # pragma: no cover
+        obj.save()  # pragma: no cover
+        return HttpResponseRedirect("list_appointments")  # pragma: no cover
 
 
 class AppointmentEditView(LoginRequiredMixin, UpdateView):
@@ -115,7 +115,7 @@ class AppointmentDeleteView(LoginRequiredMixin, DeleteView):
     success_url = "/list_appointments"
 
     def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)# pragma: no cover 
+        return self.delete(request, *args, **kwargs)  # pragma: no cover
 
 
 class ListExamView(LoginRequiredMixin, View):
@@ -140,10 +140,10 @@ class ExamCreateView(LoginRequiredMixin, CreateView):
     template_name = "exames/exam_form.html"
 
     def form_valid(self, form):
-        obj = form.save(commit=False) # pragma: no cover
-        obj.user = self.request.user# pragma: no cover
-        obj.save()# pragma: no cover
-        return HttpResponseRedirect("list_exams")# pragma: no cover
+        obj = form.save(commit=False)  # pragma: no cover
+        obj.user = self.request.user  # pragma: no cover
+        obj.save()  # pragma: no cover
+        return HttpResponseRedirect("list_exams")  # pragma: no cover
 
 
 class ExamEditView(LoginRequiredMixin, UpdateView):
@@ -160,7 +160,7 @@ class ExamDeleteView(LoginRequiredMixin, DeleteView):
     success_url = "/list_exams"
 
     def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)# pragma: no cover 
+        return self.delete(request, *args, **kwargs)  # pragma: no cover
 
 
 class ListDoneAppointmentView(LoginRequiredMixin, View):

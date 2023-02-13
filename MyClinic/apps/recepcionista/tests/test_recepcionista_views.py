@@ -74,7 +74,11 @@ class RecepcionistViewsTest(RecepcionistTestBase):
             "value": 180,
             "date": datetime.date(2023, 2, 12),
         }
-        response = self.client.post(reverse_lazy('receita_form', kwargs={"pk":income.pk}),income_update,follow=True)
+        response = self.client.post(
+            reverse_lazy("receita_form", kwargs={"pk": income.pk}),
+            income_update,
+            follow=True,
+        )
         assert response.status_code == 200
 
     def test_appointment_create_view(self):
@@ -97,11 +101,14 @@ class RecepcionistViewsTest(RecepcionistTestBase):
         appoint_update = {
             "patient": "Julieta B.",
             "age": "11",
-            "date":datetime.date.today()
+            "date": datetime.date.today(),
         }
-        response = self.client.post(reverse_lazy('appointment_form', kwargs={"pk":appoint.pk}),appoint_update,follow=True)
+        response = self.client.post(
+            reverse_lazy("appointment_form", kwargs={"pk": appoint.pk}),
+            appoint_update,
+            follow=True,
+        )
         assert response.status_code == 200
-
 
     def test_exam_create_view(self):
         self.create_test_recepcionist()
@@ -123,9 +130,11 @@ class RecepcionistViewsTest(RecepcionistTestBase):
         exam_update = {
             "patient": "Julieta V.",
             "age": "11",
-            "date":datetime.date.today()
+            "date": datetime.date.today(),
         }
-        response = self.client.post(reverse_lazy('exam_form', kwargs={"pk":exam.pk}),exam_update,follow=True)
+        response = self.client.post(
+            reverse_lazy("exam_form", kwargs={"pk": exam.pk}), exam_update, follow=True
+        )
         assert response.status_code == 200
 
     def test_remove_income(self):
