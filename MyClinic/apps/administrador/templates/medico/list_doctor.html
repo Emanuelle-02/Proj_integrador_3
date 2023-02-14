@@ -40,7 +40,7 @@
                         <td>{{doctor.user.email}}</td>
                         <td>{{doctor.user.phone}}</td>
                         <td>
-                            <a href="{% url 'doctor_create' doctor.user.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-user-pen"></i></a>
+                            <a href="{% url 'doctor_create' doctor.user.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></a>
                             <a href="{% url 'remove_doctor' doctor.user.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-user-minus"></i></a>
                         </td>  
                     </tr>

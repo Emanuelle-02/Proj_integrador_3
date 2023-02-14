@@ -41,7 +41,7 @@
                         <td>{{income.user}}</td>
                         <td>{{income.date}}</td>
                         <td>
-                            <a href="{% url 'receita_form' income.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'receita_form' income.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="{% url 'delete_receita' income.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>

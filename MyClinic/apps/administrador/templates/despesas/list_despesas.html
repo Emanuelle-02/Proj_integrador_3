@@ -17,7 +17,7 @@
                 <a href="{% url 'despesa_form' %}" id="despesa_form" class="btn btn-primary btn-sm">Adicionar Despesa</a>
             </div>
             <div class="col-md-2 mt-3">
-                <a href="{% url 'export_excel' %}" id="export_excel" class="btn btn-secondary">Exportar Excel</a>
+                <a href="{% url 'export_excel' %}" id="export_excel" class="btn btn-dark">Exportar Excel</a>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
                         <td>{{despesa.value}}</td>
                         <td>{{despesa.date}}</td>
                         <td>
-                            <a href="{% url 'despesa_form' despesa.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'despesa_form' despesa.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="{% url 'delete_despesa' despesa.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>

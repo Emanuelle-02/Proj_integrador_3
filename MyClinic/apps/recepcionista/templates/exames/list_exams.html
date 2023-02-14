@@ -43,7 +43,7 @@
                         <td>{{exam.doctor}}</td>
                         <td>{{exam.date}}</td>
                         <td>
-                            <a href="{% url 'exam_form' exam.id %}" class="btn btn-secondary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'exam_form' exam.id %}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="{% url 'delete_exam' exam.id %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a>
                         </td>
                     </tr>
